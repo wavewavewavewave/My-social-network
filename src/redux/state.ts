@@ -66,6 +66,7 @@ export const addPost = (postMessage: string) => {
         message: postMessage,
         likesCount: 0
     }
+
     state.profilePage.posts.push(newPost)
     rerenderTree(state)
 }
