@@ -12,7 +12,7 @@ import { StateType} from "./redux/state";
 
 type PropsAppType = {
     state: StateType
-    addPostCallback: (postMessage: string) => void
+    addPostCallback: () => void
     updatePost: (newPost: string) => void
     newPostText: string
 }

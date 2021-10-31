@@ -5,7 +5,7 @@ import {PostsType, ProfilePageType} from "../../../redux/state";
 
 type PropsType = {
     posts: Array<PostsType>
-    addPostCallback: (postMessage: string) => void
+    addPostCallback: () => void
     updatePost: (newPost: string) => void
     newPostText: string
 }
@@ -24,8 +24,7 @@ export const UserPost = (props: PropsType) => {
        })*/
 
     const addPost = () => {
-        props.addPostCallback(props.newPostText)
-        props.updatePost('')
+        props.addPostCallback()
     }
     const onPostAdd = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updatePost(e.currentTarget.value)

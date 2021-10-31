@@ -5,7 +5,7 @@ import {ProfilePageType} from "../../redux/state";
 
 type ContentType = {
     state: ProfilePageType
-    addPostCallback: (postMessage: string) => void
+    addPostCallback: () => void
     updatePost: (newPost: string) => void
     newPostText: string
 }
