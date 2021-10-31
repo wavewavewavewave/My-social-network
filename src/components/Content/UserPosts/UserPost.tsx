@@ -24,10 +24,11 @@ export const UserPost = (props: PropsType) => {
        })*/
 
     const addPost = () => {
-            props.addPostCallback(props.newPostText)
+        props.addPostCallback(props.newPostText)
+        props.updatePost('')
     }
     const onPostAdd = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            props.updatePost(e.currentTarget.value)
+        props.updatePost(e.currentTarget.value)
     }
 
     const removePost = () => {
