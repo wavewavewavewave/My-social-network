@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent, ChangeEventHandler} from "react";
 import s from './UserPosts.module.css';
 import {Post} from "./Post/Post";
 import {PostsType, ProfilePageType} from "../../../redux/state";
@@ -7,6 +7,7 @@ type PropsType = {
     posts: Array<PostsType>
     addPostCallback: (postMessage: string) => void
     updatePost: (newPost: string) => void
+    newPostText: string
 }
 
 export const UserPost = (props: PropsType) => {
@@ -21,18 +22,16 @@ export const UserPost = (props: PropsType) => {
                />
            )
        })*/
-    const newPostElementRef = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        if (newPostElementRef.current) {
-            props.addPostCallback(newPostElementRef.current.value)
-            newPostElementRef.current.value = '';
-        }
+            props.addPostCallback(props.newPostText)
     }
-    const onPostAdd = () => {
-        if (newPostElementRef.current) {
-            props.updatePost(newPostElementRef.current.value)
-        }
+    const onPostAdd = (e: ChangeEvent<HTMLTextAreaElement>) => {
+            props.updatePost(e.currentTarget.value)
+    }
+
+    const removePost = () => {
+        alert('Bye Bro')
     }
 
 
@@ -40,13 +39,11 @@ export const UserPost = (props: PropsType) => {
         <div className={s.postsblock}>
             <h3>My Post</h3>
             <div>
-                <textarea onChange={onPostAdd} ref={newPostElementRef}/>
+                <textarea onChange={onPostAdd} value={props.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>
-                <button onClick={() => {
-                    alert('Bye Bro')
-                }}>Remove
+                <button onClick={removePost}>Remove
                 </button>
             </div>
 

@@ -14,6 +14,7 @@ type PropsAppType = {
     state: StateType
     addPostCallback: (postMessage: string) => void
     updatePost: (newPost: string) => void
+    newPostText: string
 }
 
 export const App = (props: PropsAppType) => {
@@ -22,7 +23,10 @@ export const App = (props: PropsAppType) => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper'>
-                    <Route path='/profile' render={() => <Content state={props.state.profilePage} addPostCallback={props.addPostCallback} updatePost={props.updatePost}/>}/>
+                    <Route path='/profile' render={() => <Content state={props.state.profilePage}
+                                                                  addPostCallback={props.addPostCallback}
+                                                                  updatePost={props.updatePost}
+                                                                  newPostText={props.newPostText}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

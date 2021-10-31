@@ -7,6 +7,9 @@ import React from "react";
 export const rerenderTree = (state: StateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPostCallback={addPost} updatePost={addNewPost}/>
+            <App state={state}
+                 addPostCallback={addPost}
+                 updatePost={addNewPost}
+                 newPostText={state.profilePage.newPostText}/>
         </BrowserRouter>, document.getElementById('root'));
 }

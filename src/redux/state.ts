@@ -35,7 +35,7 @@ export const state: StateType = {
             {id: 2, message: 'I on Tuesday, yep', likesCount: 10},
             {id: 3, message: 'Learning programming is so hard(', likesCount: 12}
         ],
-        newPostText : 'it - kamasutra'
+        newPostText : ''
 
     },
     dialogsPage: {

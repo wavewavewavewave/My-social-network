@@ -7,6 +7,7 @@ type ContentType = {
     state: ProfilePageType
     addPostCallback: (postMessage: string) => void
     updatePost: (newPost: string) => void
+    newPostText: string
 }
 
 export const Content = (props: ContentType) => {
@@ -15,7 +16,8 @@ export const Content = (props: ContentType) => {
             <ProfileInfo/>
             <UserPost posts={props.state.posts}
                       addPostCallback={props.addPostCallback}
-                      updatePost={props.updatePost}/>
+                      updatePost={props.updatePost}
+                      newPostText={props.newPostText}/>
         </div>
 
     );
