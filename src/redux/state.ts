@@ -1,4 +1,8 @@
-import {rerenderTree} from "../render";
+import {observe} from "web-vitals/dist/modules/lib/observe";
+
+let rerenderEntireTree = () => {
+    console.log('HiHi')
+}
 
 export type MessageType = {
     message: string
@@ -68,10 +72,14 @@ export const addPost = () => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderTree(state)
+    rerenderEntireTree()
 }
 
 export const addNewPost = (newPost: string) => {
     state.profilePage.newPostText = newPost
-    rerenderTree(state)
+    rerenderEntireTree()
+}
+
+export const subscribe = (observer: () => void) => {
+    rerenderEntireTree = observer;
 }
