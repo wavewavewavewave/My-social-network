@@ -6,8 +6,8 @@ import {ProfilePageType} from "../../redux/state";
 type ContentType = {
     state: ProfilePageType
     addPostCallback: () => void
-    updatePost: (newPost: string) => void
     newPostText: string
+    updatePost: (newPost: string) => void
 }
 
 export const Content = (props: ContentType) => {
