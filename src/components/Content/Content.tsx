@@ -7,16 +7,16 @@ type ContentType = {
     state: ProfilePageType
     addPostCallback: () => void
     newPostText: string
-    updatePost: (newPost: string) => void
+    updatePostCallback: (newPost: string) => void
 }
 
-export const Content = (props: ContentType) => {
+export const Content: React.FC<ContentType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
             <UserPost posts={props.state.posts}
                       addPostCallback={props.addPostCallback}
-                      updatePost={props.updatePost}
+                      updatePostCallback={props.updatePostCallback}
                       newPostText={props.newPostText}/>
         </div>
 

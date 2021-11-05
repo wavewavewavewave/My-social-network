@@ -13,11 +13,11 @@ import {StateType, StoreType} from "./redux/state";
 type PropsAppType = {
     store: StoreType
     addPostCallback: () => void
-    updatePost: (newPost: string) => void
+    updatePostCallback: (newPost: string) => void
     newPostText: string
 }
 
-export const App = (props: PropsAppType) => {
+export const App: React.FC<PropsAppType> = (props) => {
     const state = props.store.getState()
     return (
         <div className='app-wrapper'>
@@ -25,9 +25,9 @@ export const App = (props: PropsAppType) => {
             <Navbar/>
             <div className='app-wrapper'>
                 <Route path='/profile' render={() => <Content state={props.store._state.profilePage}
-                                                              addPostCallback={props.addPostCallback.bind(props.store)}
+                                                              addPostCallback={props.addPostCallback}
                                                               newPostText={props.newPostText}
-                                                              updatePost={props.updatePost.bind(props.store)}/>}/>
+                                                              updatePostCallback={props.updatePostCallback}/>}/>
                 <Route path='/dialogs' render={() => <Dialogs state={props.store._state.dialogsPage}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>

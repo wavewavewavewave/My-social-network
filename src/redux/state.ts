@@ -1,9 +1,5 @@
 import {observe} from "web-vitals/dist/modules/lib/observe";
 
-let rerenderEntireTree = () => {
-    console.log('HiHi')
-}
-
 export type MessageType = {
     message: string
     id: number
@@ -36,7 +32,7 @@ export type StoreType = {
     addNewPost: (newPost: string) => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
-
+    _rerenderEntireTree: () => void
 }
 
 export const store: StoreType = {
@@ -69,6 +65,9 @@ export const store: StoreType = {
             ]
         },
     },
+     _rerenderEntireTree () {
+        console.log('HiHi')
+    },
     addPost() {
         const newPost: PostsType = {
             id: new Date().getTime(),
@@ -77,14 +76,14 @@ export const store: StoreType = {
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
-        rerenderEntireTree()
+        this._rerenderEntireTree()
     },
     addNewPost(newPost: string) {
         this._state.profilePage.newPostText = newPost
-        rerenderEntireTree()
+        this._rerenderEntireTree()
     },
     subscribe (observer: () => void) {
-        rerenderEntireTree = observer;
+        this._rerenderEntireTree = observer;
     },
     getState () {
         return this._state

@@ -6,11 +6,11 @@ import {PostsType, ProfilePageType} from "../../../redux/state";
 type PropsType = {
     posts: Array<PostsType>
     addPostCallback: () => void
-    updatePost: (newPost: string) => void
+    updatePostCallback: (newPost: string) => void
     newPostText: string
 }
 
-export const UserPost = (props: PropsType) => {
+export const UserPost: React.FC<PropsType> = (props) => {
 
     const postsElement = props.posts.map(post => <Post post={post}/>)
 
@@ -27,7 +27,7 @@ export const UserPost = (props: PropsType) => {
         props.addPostCallback()
     }
     const onPostAdd = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updatePost(e.currentTarget.value)
+        props.updatePostCallback(e.currentTarget.value)
     }
 
     const removePost = () => {
