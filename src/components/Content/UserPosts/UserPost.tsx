@@ -1,12 +1,11 @@
 import React, {ChangeEvent, ChangeEventHandler} from "react";
 import s from './UserPosts.module.css';
 import {Post} from "./Post/Post";
-import {PostsType, ProfilePageType} from "../../../redux/state";
+import {ActionsTypes, PostsType, ProfilePageType} from "../../../redux/state";
 
 type PropsType = {
     posts: Array<PostsType>
-    addPostCallback: () => void
-    updatePostCallback: (newPost: string) => void
+    dispatch: (action: ActionsTypes) => void
     newPostText: string
 }
 
@@ -24,10 +23,12 @@ export const UserPost: React.FC<PropsType> = (props) => {
        })*/
 
     const addPost = () => {
-        props.addPostCallback()
+        /*props.addPost()*/
+        props.dispatch({type: 'ADD-POST', newPostText: props.newPostText})
     }
     const onPostAdd = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updatePostCallback(e.currentTarget.value)
+        /*props.updatePostCallback(e.currentTarget.value)*/
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newPost: e.currentTarget.value})
     }
 
     const removePost = () => {

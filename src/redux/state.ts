@@ -1,5 +1,4 @@
 import {observe} from "web-vitals/dist/modules/lib/observe";
-
 export type MessageType = {
     message: string
     id: number
@@ -28,12 +27,25 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType
-    addPost: () => void
-    addNewPost: (newPost: string) => void
+    _addPost: () => void
+    _updateNewPostText: (newPost: string) => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
     _rerenderEntireTree: () => void
+    dispatch: (action: ActionsTypes) => void
 }
+
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    newPostText: string
+}
+export type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newPost: string
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextType
+
 
 export const store: StoreType = {
     _state: {
@@ -65,10 +77,16 @@ export const store: StoreType = {
             ]
         },
     },
-     _rerenderEntireTree () {
+    _rerenderEntireTree() {
         console.log('HiHi')
     },
-    addPost() {
+    getState() {
+        return this._state
+    },
+    subscribe(observer: () => void) {
+        this._rerenderEntireTree = observer;
+    },
+    _addPost() {
         const newPost: PostsType = {
             id: new Date().getTime(),
             message: this._state.profilePage.newPostText,
@@ -78,15 +96,24 @@ export const store: StoreType = {
         this._state.profilePage.newPostText = ''
         this._rerenderEntireTree()
     },
-    addNewPost(newPost: string) {
+    _updateNewPostText(newPost: string) {
         this._state.profilePage.newPostText = newPost
         this._rerenderEntireTree()
     },
-    subscribe (observer: () => void) {
-        this._rerenderEntireTree = observer;
-    },
-    getState () {
-        return this._state
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostsType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._rerenderEntireTree()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPost
+            this._rerenderEntireTree()
+        }
     }
 }
 

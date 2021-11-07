@@ -8,8 +8,7 @@ export const rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <App store={store}
-                 addPostCallback={store.addPost.bind(store)}
-                 updatePostCallback={store.addNewPost.bind(store)}
+                 dispatch={store.dispatch.bind(store)}
                  newPostText={store._state.profilePage.newPostText}/>
         </BrowserRouter>, document.getElementById('root'));
 }
