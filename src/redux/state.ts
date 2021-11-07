@@ -1,4 +1,4 @@
-import {observe} from "web-vitals/dist/modules/lib/observe";
+import {observe} from "web-vitals/dist/modules/lib/observe"
 export type MessageType = {
     message: string
     id: number
@@ -35,17 +35,31 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type AddPostActionType = {
+export type ActionsTypes = AddPostActionACType | updateNewPostTextACType
+/*export type AddPostActionType = {
     type: 'ADD-POST'
     newPostText: string
-}
-export type UpdateNewPostTextType = {
+}*/
+/*export type UpdateNewPostTextType = {
     type: 'UPDATE-NEW-POST-TEXT'
     newPost: string
+}*/
+
+export type AddPostActionACType = ReturnType<typeof addPostAC>
+export const addPostAC = (newPostText: string) => {
+    return {
+        type: "ADD-POST",
+        newPostText
+    } as const
 }
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextType
-
+export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
+export const updateNewPostTextAC = (newPost: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newPost
+    } as const
+}
 
 export const store: StoreType = {
     _state: {
