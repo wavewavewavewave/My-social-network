@@ -20,6 +20,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type StateType = {
     profilePage: ProfilePageType
@@ -35,7 +36,7 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostActionACType | updateNewPostTextACType
+export type ActionsTypes = AddPostActionACType | updateNewPostTextACType | newMessageTextACType | sendMessageACType
 /*export type AddPostActionType = {
     type: 'ADD-POST'
     newPostText: string
@@ -58,6 +59,19 @@ export const updateNewPostTextAC = (newPost: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newPost
+    } as const
+}
+export type newMessageTextACType = ReturnType<typeof newMessageTextAC>
+export const newMessageTextAC = (newText: string) => {
+    return {
+        type: "NEW-MESSAGE-TEXT",
+        newText
+    } as const
+}
+export type sendMessageACType = ReturnType<typeof sendMessageAC>
+export const sendMessageAC = () => {
+    return {
+        type: "SEND_MESSAGE"
     } as const
 }
 
@@ -83,12 +97,13 @@ export const store: StoreType = {
             ],
             messages: [
                 {id: 1, message: 'Hello, how are you?'},
-                {id: 2, message: 'Dude. you really good man!'},
+                {id: 2, message: 'Dude,you really good!'},
                 {id: 3, message: 'Maybe go on play football?'},
-                {id: 4, message: 'Come on man, dont panic, I help you with React'},
+                {id: 4, message: 'I help you with React'},
                 {id: 5, message: 'Youll never walk alone!'},
-                {id: 6, message: ' Man , programming is not hard:)'}
-            ]
+                {id: 6, message: 'Man,programming is not hard:)'}
+            ],
+            newMessageText: ""
         },
     },
     _rerenderEntireTree() {
@@ -121,11 +136,19 @@ export const store: StoreType = {
                 message: this._state.profilePage.newPostText,
                 likesCount: 0
             }
-            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = ''
             this._rerenderEntireTree()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newPost
+            this._rerenderEntireTree()
+        } else if (action.type === 'NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newText
+            this._rerenderEntireTree()
+        } else if (action.type === 'SEND_MESSAGE') {
+            let newText = this._state.dialogsPage.newMessageText
+            this._state.dialogsPage.messages.push({id: 6, message: newText})
+            this._state.dialogsPage.newMessageText = ''
             this._rerenderEntireTree()
         }
     }

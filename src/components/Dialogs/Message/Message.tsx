@@ -12,5 +12,6 @@ export const MessageItem = (props: MessageItemType) => {
         <div className={s.dialog}>
             {props.message}
         </div>
+
     )
 }

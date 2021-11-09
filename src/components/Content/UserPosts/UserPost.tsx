@@ -27,7 +27,7 @@ export const UserPost: React.FC<PropsType> = (props) => {
         /*props.dispatch({type: 'ADD-POST', newPostText: props.newPostText})*/
         props.dispatch(addPostAC(props.newPostText))
     }
-    const onPostAdd = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onPostAdd = (e: ChangeEvent<HTMLInputElement>) => {
         /*props.updatePostCallback(e.currentTarget.value)*/
         let text = e.currentTarget.value
         /*props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newPost: text})*/
@@ -43,7 +43,7 @@ export const UserPost: React.FC<PropsType> = (props) => {
         <div className={s.postsblock}>
             <h3>My Post</h3>
             <div>
-                <textarea onChange={onPostAdd} value={props.newPostText}/>
+                <input onChange={onPostAdd} value={props.newPostText}/>
             </div>
             <div>
                 <button onClick={addPost}>Add post</button>
