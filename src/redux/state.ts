@@ -1,4 +1,7 @@
 import {observe} from "web-vitals/dist/modules/lib/observe"
+import {profileReducer, profileReducerType} from "./profileReducer";
+import {dialogsReducer, dialogsReducerType} from "./dialogsReducer";
+
 export type MessageType = {
     message: string
     id: number
@@ -8,7 +11,7 @@ export type DialogsType = {
     id: number
     name: string
 }
-export type PostsType = {
+export type PostsType =  {
     id: number
     message: string
     likesCount: number
@@ -36,44 +39,7 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostActionACType | updateNewPostTextACType | newMessageTextACType | sendMessageACType
-/*export type AddPostActionType = {
-    type: 'ADD-POST'
-    newPostText: string
-}*/
-/*export type UpdateNewPostTextType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newPost: string
-}*/
-
-export type AddPostActionACType = ReturnType<typeof addPostAC>
-export const addPostAC = (newPostText: string) => {
-    return {
-        type: "ADD-POST",
-        newPostText
-    } as const
-}
-
-export type updateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
-export const updateNewPostTextAC = (newPost: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newPost
-    } as const
-}
-export type newMessageTextACType = ReturnType<typeof newMessageTextAC>
-export const newMessageTextAC = (newText: string) => {
-    return {
-        type: "NEW-MESSAGE-TEXT",
-        newText
-    } as const
-}
-export type sendMessageACType = ReturnType<typeof sendMessageAC>
-export const sendMessageAC = () => {
-    return {
-        type: "SEND_MESSAGE"
-    } as const
-}
+export type ActionsTypes = profileReducerType | dialogsReducerType
 
 export const store: StoreType = {
     _state: {
@@ -130,27 +96,9 @@ export const store: StoreType = {
         this._rerenderEntireTree()
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostsType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._rerenderEntireTree()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newPost
-            this._rerenderEntireTree()
-        } else if (action.type === 'NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newText
-            this._rerenderEntireTree()
-        } else if (action.type === 'SEND_MESSAGE') {
-            let newText = this._state.dialogsPage.newMessageText
-            this._state.dialogsPage.messages.push({id: 6, message: newText})
-            this._state.dialogsPage.newMessageText = ''
-            this._rerenderEntireTree()
-        }
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.dialogsPage, action)
+        this._rerenderEntireTree()
     }
 }
 
