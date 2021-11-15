@@ -40,7 +40,7 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
                     <div>
                         <input placeholder={'Message...'}
                                onChange={onChangeSendMessage}
-                               value={newMessageText}/>
+                                  value={newMessageText}/>
                     </div>
                     <div>
                         <button onClick={onSendMessageClick}>Send</button>
@@ -53,3 +53,5 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
 
     );
 }
+
+

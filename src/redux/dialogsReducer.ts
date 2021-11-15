@@ -1,19 +1,21 @@
 import {ActionsTypes, DialogsPageType, PostsType} from "./state";
+import {stat} from "fs";
 
 
 export const dialogsReducer = (state: DialogsPageType, action: ActionsTypes) => {
-     switch (action.type) {
-         case "NEW-MESSAGE-TEXT": {
-            return state.newMessageText = action.newText
-         }
-         case "SEND-MESSAGE": {
-             return
-             let newText = state.newMessageText
-             state.messages.push({id: 6, message: newText})
-             state.newMessageText = ''
-         }
-             return state
-     }
+    switch (action.type) {
+        case "NEW-MESSAGE-TEXT": {
+            state.newMessageText = action.newText
+            return state;
+        }
+        case "SEND-MESSAGE":
+            let newText = state.newMessageText
+            state.messages.push({id: 6, message: newText})
+            state.newMessageText = ''
+            return state
+        default:
+            return state
+    }
 }
 
 export type dialogsReducerType = NewMessageTextACType | SendMessageACType
