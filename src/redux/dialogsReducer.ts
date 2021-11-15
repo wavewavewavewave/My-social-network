@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsPageType, PostsType} from "./state";
+import {ActionsTypes, DialogsPageType, PostsType} from "./store";
 import {stat} from "fs";
 
 
