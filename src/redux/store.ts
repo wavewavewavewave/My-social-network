@@ -41,7 +41,7 @@ export type StoreType = {
 
 export type ActionsTypes = profileReducerType | dialogsReducerType
 
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -102,4 +102,4 @@ export const store: StoreType = {
     }
 }
 
-
+export default store
