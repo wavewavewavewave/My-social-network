@@ -16,6 +16,7 @@ type PropsAppType = {
     newPostText: string
 }
 
+
 export const App: React.FC<PropsAppType> = (props) => {
     const state = props.store.getState()
     return (
