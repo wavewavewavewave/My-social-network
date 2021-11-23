@@ -8,20 +8,23 @@ import {StateType} from "./redux/store";
 import {store} from "./redux/reduxStore";
 
 
+
 // export const rerenderEntireTree = () => {
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-        <App store={storeOld}
-             dispatch={storeOld.dispatch.bind(storeOld)}
-             newPostText={storeOld._state.profilePage.newPostText}/>
-        </BrowserRouter></Provider> , document.getElementById('root'));
+    <BrowserRouter>
+        <Provider store={store}>
+            <App store={storeOld}
+                 dispatch={storeOld.dispatch.bind(storeOld)}
+                 newPostText={storeOld._state.profilePage.newPostText}/>
+        </Provider>
+    </BrowserRouter>, document.getElementById('root'));
 
 
-      {/*  rerenderEntireTree(store.getState());
+{/*  rerenderEntireTree(store.getState());
         store.subscribe(() => {
         let state = store.getState()
         rerenderEntireTree(state)
-    });*/}
+    });*/
+}
 

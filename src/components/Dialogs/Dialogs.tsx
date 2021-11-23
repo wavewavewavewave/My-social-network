@@ -2,8 +2,7 @@ import React, {ChangeEvent} from "react";
 import s from './DIalogs.module.css';
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogsItem/DialogsItem";
-import {newMessageTextAC, sendMessageAC} from "../../redux/dialogsReducer";
-import {ActionsTypes, DialogsPageType, StateType, StoreType} from "../../redux/store";
+import {DialogsPageType} from "../../redux/store";
 
 type DialogsType = {
     onChangeSendMessage: (newText: string) => void
@@ -28,7 +27,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
         let newText = e.currentTarget.value
         props.onChangeSendMessage(newText)
     }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
