@@ -22,7 +22,7 @@ export const UserPostContainer: React.FC<PropsType> = (props) => {
     }
 
     return (<UserPost updateNewPostText={onPostAdd}
-                      addPost={addPost} posts={props.store._state.profilePage.posts}
+                      addPost={addPost} posts={state.profilePage.posts}
                       newPostText={state.profilePage.newPostText}/>
     )
 }

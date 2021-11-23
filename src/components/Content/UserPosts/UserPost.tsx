@@ -42,7 +42,6 @@ export const UserPost: React.FC<PropsType> = (props) => {
 
             <div className={s.posts}>
                 {postsElement}
-                {/*<Post massage={postsData[1].massage} likesCount={postsData[1].likesCount}/>*/}
             </div>
         </div>
 
