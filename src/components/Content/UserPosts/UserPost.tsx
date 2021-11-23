@@ -6,33 +6,21 @@ import {ActionsTypes, PostsType} from "../../../redux/store";
 
 type PropsType = {
     posts: Array<PostsType>
-    dispatch: (action: ActionsTypes) => void
     newPostText: string
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
 export const UserPost: React.FC<PropsType> = (props) => {
 
     const postsElement = props.posts.map(post => <Post post={post}/>)
 
-    /*   const postsElement = props.posts.map(post => {
-           return (
-               <Post
-                   message={post.message}
-                   likesCount={post.likesCount}
-               />
-           )
-       })*/
-
     const addPost = () => {
-        /*props.addPost()*/
-        /*props.dispatch({type: 'ADD-POST', newPostText: props.newPostText})*/
-        props.dispatch(addPostAC(props.newPostText))
+        props.addPost()
     }
     const onPostAdd = (e: ChangeEvent<HTMLInputElement>) => {
-        /*props.updatePostCallback(e.currentTarget.value)*/
         let text = e.currentTarget.value
-        /*props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newPost: text})*/
-        props.dispatch(updateNewPostTextAC(text))
+        props.updateNewPostText(text)
     }
 
     const removePost = () => {

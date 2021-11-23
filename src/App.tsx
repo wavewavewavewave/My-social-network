@@ -23,11 +23,11 @@ export const App: React.FC<PropsAppType> = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper'>
-                <Route path='/profile' render={() => <Content state={props.store._state.profilePage}
+                <Route path='/profile' render={() => <Content store={props.store}
                                                               dispatch={props.dispatch}
                                                               newPostText={props.newPostText}
                 />}/>
-                <Route path='/dialogs' render={() => <Dialogs state={props.store._state.dialogsPage}
+                <Route path='/dialogs' render={() => <Dialogs store={props.store._state.dialogsPage}
                                                               dispatch={props.dispatch}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>

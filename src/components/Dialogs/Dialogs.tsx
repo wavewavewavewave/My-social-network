@@ -6,16 +6,16 @@ import {newMessageTextAC, sendMessageAC} from "../../redux/dialogsReducer";
 import {ActionsTypes, DialogsPageType} from "../../redux/store";
 
 type DialogsType = {
-    state: DialogsPageType
+    store: DialogsPageType
     dispatch: (action: ActionsTypes) => void
 
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-    let dialogsElement = props.state.dialogs.map(dialogs => <DialogItem name={dialogs.name} id={dialogs.id}/>);
-    let messagesElement = props.state.messages.map(messages => <MessageItem message={messages.message}
+    let dialogsElement = props.store.dialogs.map(dialogs => <DialogItem name={dialogs.name} id={dialogs.id}/>);
+    let messagesElement = props.store.messages.map(messages => <MessageItem message={messages.message}
                                                                             id={messages.id}/>)
-    let newMessageText = props.state.newMessageText
+    let newMessageText = props.store.newMessageText
 
     let onSendMessageClick = () => {
         props.dispatch(sendMessageAC())
@@ -29,8 +29,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElement}
-                {/*<DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>*/}
-                {/*<DialogItem name={dialogsData[2].name} id={dialogsData[2].id}/>*/}
             </div>
 
 
@@ -46,8 +44,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
                         <button onClick={onSendMessageClick}>Send</button>
                     </div>
                 </div>
-                {/*<MessageItem message={messagesData[1].message} id={messagesData[1].id}/>*/}
-                {/*<MessageItem message={messagesData[2].message} id={messagesData[2].id} />*/}
             </div>
         </div>
 
