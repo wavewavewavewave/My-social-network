@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import storeOld from "./redux/store";
 import {StateType} from "./redux/store";
 import {store} from "./redux/reduxStore";
+import {StoreContext} from "./StoreContext.";
 
 
 
@@ -13,11 +14,9 @@ import {store} from "./redux/reduxStore";
 
 ReactDOM.render(
     <BrowserRouter>
-        <Provider store={store}>
-            <App store={storeOld}
-                 dispatch={storeOld.dispatch.bind(storeOld)}
-                 newPostText={storeOld._state.profilePage.newPostText}/>
-        </Provider>
+        <StoreContext.Provider value={storeOld}>
+            <App />
+        </StoreContext.Provider>
     </BrowserRouter>, document.getElementById('root'));
 
 
