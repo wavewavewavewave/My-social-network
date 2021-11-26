@@ -5,14 +5,13 @@ import {ActionsTypes, ProfilePageType, StoreType} from "../../redux/store";
 import {UserPostContainer} from "./UserPosts/UserPostContainer";
 
 type ContentType = {
-    store: StoreType
 }
 
 export const Content: React.FC<ContentType> = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <UserPostContainer store={props.store}/>
+            <UserPostContainer/>
         </div>
 
     );

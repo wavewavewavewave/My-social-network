@@ -2,11 +2,11 @@ import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import {App} from "./App";
 import React from "react";
-import {Provider} from "react-redux";
-import storeOld from "./redux/store";
+// import {Provider} from "react-redux";
+// import storeOld from "./redux/store";
 import {StateType} from "./redux/store";
 import {store} from "./redux/reduxStore";
-import {StoreContext} from "./StoreContext.";
+import {Provider, StoreContext} from "./StoreContext.";
 
 
 
@@ -14,9 +14,9 @@ import {StoreContext} from "./StoreContext.";
 
 ReactDOM.render(
     <BrowserRouter>
-        <StoreContext.Provider value={storeOld}>
+        <Provider store={store}>
             <App />
-        </StoreContext.Provider>
+        </Provider>
     </BrowserRouter>, document.getElementById('root'));
 
 

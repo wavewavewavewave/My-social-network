@@ -22,7 +22,7 @@ let initialState: DialogsPageType = {
 
 }
 
-export const dialogsReducer = (state = initialState, action: ActionsTypes) => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes):DialogsPageType => {
     switch (action.type) {
         case "NEW-MESSAGE-TEXT": {
             state.newMessageText = action.newText

@@ -1,14 +1,13 @@
 import React from 'react';
-import {rootReducerType, store} from "./redux/reduxStore";
 import {StoreType} from "./redux/store";
+import {rootReducerType} from "./redux/reduxStore";
+import {CombinedState, Store} from "redux";
 
-//{} as StoreType
+export const StoreContext = React.createContext({} as Store<CombinedState<rootReducerType>>)
 
-export const StoreContext = React.createContext({} as StoreType)
-
-/*export type ProviderType = {
-    store: StoreType,
-    children: React.ReactNode
+export type ProviderType = {
+    store: Store<CombinedState<rootReducerType>>;
+    children: React.ReactNode;
 }
 
 export const Provider = (props: ProviderType) => {
@@ -17,4 +16,4 @@ export const Provider = (props: ProviderType) => {
             {props.children}
         </StoreContext.Provider>
     )
-}*/
+}
