@@ -12,7 +12,7 @@ type DialogsType = {
 }
 
 export const Dialogs: React.FC<DialogsType> = (props) => {
-const [value,setValue] = useState(props.newMessageText)
+// const [value,setValue] = useState(props.newMessageText)
     let state = props.dialogsPage
 
     let dialogsElement = state.dialogs.map(dialogs => <DialogItem name={dialogs.name} id={dialogs.id}/>);
@@ -26,7 +26,7 @@ const [value,setValue] = useState(props.newMessageText)
     let onChangeSendMessage = (e: ChangeEvent<HTMLInputElement>) => {
         let newText = e.currentTarget.value
         props.onChangeSendMessage(newText)
-        setValue(newText)
+        // setValue(newText)
 
     }
     return (
@@ -42,7 +42,7 @@ const [value,setValue] = useState(props.newMessageText)
                     <div>
                         <input placeholder={'Message...'}
                                onChange={onChangeSendMessage}
-                                  value={value}/>
+                                  value={props.newMessageText}/>
                     </div>
                     <div>
                         <button onClick={onSendMessageClick}>Send</button>

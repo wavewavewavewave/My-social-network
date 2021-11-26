@@ -10,16 +10,21 @@ import {Provider, StoreContext} from "./StoreContext.";
 
 
 
-// export const rerenderEntireTree = () => {
+export const rerenderEntireTree = () => {
 
-ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </BrowserRouter>, document.getElementById('root'));
+    ReactDOM.render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </BrowserRouter>, document.getElementById('root'));
 
 
+}
+rerenderEntireTree();
+store.subscribe(()=>{
+    rerenderEntireTree()
+})
 {/*  rerenderEntireTree(store.getState());
         store.subscribe(() => {
         let state = store.getState()

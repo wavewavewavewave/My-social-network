@@ -8,13 +8,13 @@ type PropsType = {}
 
 export const UserPostContainer: React.FC<PropsType> = (props) => {
 
-    // return (
-    //     <StoreContext.Consumer>{
-    //         (store) => {
+    return (
+        <StoreContext.Consumer>{
+            (store) => {
                 let state = store.getState();
 
                 const addPost = () => {
-                    store.dispatch(addPostAC(state.profilePage.newPostText))
+                    store.dispatch(addPostAC(state.profile.newPostText))
                 }
                 const onPostAdd = (text: string) => {
                     store.dispatch(updateNewPostTextAC(text))
@@ -25,10 +25,10 @@ export const UserPostContainer: React.FC<PropsType> = (props) => {
 
                return <UserPost updateNewPostText={onPostAdd}
                           addPost={addPost}
-                          posts={state.profilePage.posts}
-                          newPostText={state.profilePage.newPostText}/>
-            // }
-    //     }
-    //     </StoreContext.Consumer>
-    // )
+                          posts={state.profile.posts}
+                          newPostText={state.profile.newPostText}/>
+            }
+        }
+        </StoreContext.Consumer>
+    )
 }
