@@ -1,32 +1,34 @@
 import React, {} from "react";
-import {newMessageTextAC, sendMessageAC} from "../../redux/dialogsReducer";
-import {StoreType} from "../../redux/store";
-import {StoreContext} from "../../StoreContext.";
+import {DialogsPageType, newMessageTextAC, sendMessageAC} from "../../redux/dialogsReducer";
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
+import {rootReducerType} from "../../redux/reduxStore";
+import {Dispatch} from "redux";
 
-type DialogsType = {}
-
-export const DialogsContainer: React.FC<DialogsType> = () => {
-
-    return (
-        <StoreContext.Consumer>{
-            (store) => {
-                let state = store.getState()
-
-                let onSendMessageClick = () => {
-                    store.dispatch(sendMessageAC())
-                }
-                let onChangeSendMessage = (newText: string) => {
-                    store.dispatch(newMessageTextAC(newText))
-                }
-               return <Dialogs onChangeSendMessage={onChangeSendMessage}
-                         onSendMessageClick={onSendMessageClick}
-                         newMessageText={state.dialogs.newMessageText}
-                         dialogsPage={state.dialogs}/>
-            }
-        }
-        </StoreContext.Consumer>
-    )
+type MapStateToPropsType = {
+    dialogsPage: DialogsPageType
+    newMessageText: string
+}
+type MapDispatchToPropsType = {
+    onSendMessageClick: () => void
+    onChangeSendMessage: (newText: string) => void
 }
 
+let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
+    return {
+        dialogsPage: state.dialogs,
+        newMessageText: state.dialogs.newMessageText
+    }
+}
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        onSendMessageClick: () => {
+            dispatch(sendMessageAC())
+        },
+        onChangeSendMessage: (newText: string) => {
+            dispatch(newMessageTextAC(newText))
+        }
+    }
+}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 

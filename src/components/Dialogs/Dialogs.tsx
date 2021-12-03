@@ -2,7 +2,8 @@ import React, {ChangeEvent, useState} from "react";
 import s from './DIalogs.module.css';
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogsItem/DialogsItem";
-import {DialogsPageType} from "../../redux/store";
+import {} from "../../redux/store";
+import {DialogsPageType} from "../../redux/dialogsReducer";
 
 type DialogsType = {
     onChangeSendMessage: (newText: string) => void

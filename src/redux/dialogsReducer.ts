@@ -1,5 +1,11 @@
-import {ActionsTypes, DialogsPageType, PostsType} from "./store";
+import {ActionsTypes, DialogsType, MessageType, PostsType} from "./store";
 import {stat} from "fs";
+
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessageType>
+    newMessageText: string
+}
 
 let initialState: DialogsPageType = {
     dialogs: [
@@ -19,8 +25,8 @@ let initialState: DialogsPageType = {
         {id: 6, message: 'Man,programming is not hard:)'}
     ],
     newMessageText: ""
-
 }
+
 
 export const dialogsReducer = (state = initialState, action: ActionsTypes):DialogsPageType => {
     switch (action.type) {
