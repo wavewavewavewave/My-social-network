@@ -7,7 +7,7 @@ type PropsType = {
     posts: Array<PostsType>
     newPostText: string
     updateNewPostText: (text: string) => void
-    addPost: () => void
+    addPost: (text:string) => void
 }
 
 export const UserPost: React.FC<PropsType> = (props) => {
@@ -15,7 +15,7 @@ export const UserPost: React.FC<PropsType> = (props) => {
     const postsElement = props.posts.map(post => <Post post={post}/>)
 
     const addPost = () => {
-        props.addPost()
+        props.addPost(props.newPostText)
     }
     const onPostAdd = (e: ChangeEvent<HTMLInputElement>) => {
         let text = e.currentTarget.value

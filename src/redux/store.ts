@@ -11,16 +11,16 @@ export type DialogsType = {
     id: number
     name: string
 }
- type PostsType =  {
+type PostsType =  {
     id: number
     message: string
     likesCount: number
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
- type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
     newMessageText: string

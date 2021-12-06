@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsType, MessageType, PostsType} from "./store";
+import {ActionsTypes, DialogsType, MessageType} from "./store";
 import {stat} from "fs";
 
 export type DialogsPageType = {
@@ -6,6 +6,7 @@ export type DialogsPageType = {
     messages: Array<MessageType>
     newMessageText: string
 }
+
 
 let initialState: DialogsPageType = {
     dialogs: [
