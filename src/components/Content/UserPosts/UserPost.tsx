@@ -6,8 +6,9 @@ import {PostsType} from "../../../redux/profileReducer";
 type PropsType = {
     posts: Array<PostsType>
     newPostText: string
-    updateNewPostText: (text: string) => void
-    addPost: (text:string) => void
+    onPostAdd: (text: string) => void
+    //updateNewPostText: (text: string) => void
+    addPost: (text: string) => void
 }
 
 export const UserPost: React.FC<PropsType> = (props) => {
@@ -19,7 +20,7 @@ export const UserPost: React.FC<PropsType> = (props) => {
     }
     const onPostAdd = (e: ChangeEvent<HTMLInputElement>) => {
         let text = e.currentTarget.value
-        props.updateNewPostText(text)
+        props.onPostAdd(text)
     }
 
     const removePost = () => {

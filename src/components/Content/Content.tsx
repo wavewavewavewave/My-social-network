@@ -7,7 +7,7 @@ export const Content = () => {
     return (
         <div>
             <ProfileInfo/>
-            <UserPostContainer/>
+            <UserPostContainer />
         </div>
 
     );

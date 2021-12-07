@@ -1,4 +1,3 @@
-import {observe} from "web-vitals/dist/modules/lib/observe"
 import {profileReducer, profileReducerType} from "./profileReducer";
 import {dialogsReducer, dialogsReducerType} from "./dialogsReducer";
 
@@ -11,7 +10,7 @@ export type DialogsType = {
     id: number
     name: string
 }
-type PostsType =  {
+export type PostsType =  {
     id: number
     message: string
     likesCount: number

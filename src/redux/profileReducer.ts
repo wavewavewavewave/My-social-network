@@ -27,12 +27,16 @@ let initialState: ProfilePageType = {
                 message: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost);
-            state.newPostText = ''
-            return state
+            return {
+                ...state,
+                posts: [newPost, ...state.posts],
+                newPostText: ''
+            }
         case "UPDATE-NEW-POST-TEXT": {
-             state.newPostText = action.newPost
-            return state
+            return {
+                ...state,
+                newPostText: action.newPost
+            }
         }
         default: return state
     }
