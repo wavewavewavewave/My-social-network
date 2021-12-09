@@ -42,7 +42,6 @@ let initialState: ProfilePageType = {
     }
 }
 
-// export type profileReducerType = AddPostActionACType | updateNewPostTextACType
 export type profileReducerType = AddPostActionACType | UpdateNewPostTextACType
 
 export type AddPostActionACType = ReturnType<typeof addPostAC>

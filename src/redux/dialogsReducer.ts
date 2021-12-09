@@ -38,14 +38,11 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes):Dialo
             }
         }
         case "SEND-MESSAGE":
-            /*let newText = state.newMessageText
-            state.messages.push({id: 6, message: newText})
-            state.newMessageText = ''*/
-            return {
-                ...state,
-                messages: [{id: 6, message: state.newMessageText}],
-                newMessageText: ''
-            }
+            let stateCopy = {...state}
+            stateCopy.newMessageText = state.newMessageText
+            stateCopy.messages.push({id: 6, message: stateCopy.newMessageText})
+            stateCopy.newMessageText = ''
+            return stateCopy
         default:
             return state
     }
