@@ -29,7 +29,7 @@ let initialState: DialogsPageType = {
 }
 
 
-export const dialogsReducer = (state = initialState, action: ActionsTypes):DialogsPageType => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes): DialogsPageType => {
     switch (action.type) {
         case "NEW-MESSAGE-TEXT": {
             return {
@@ -38,11 +38,12 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes):Dialo
             }
         }
         case "SEND-MESSAGE":
-            let stateCopy = {...state}
-            stateCopy.newMessageText = state.newMessageText
-            stateCopy.messages.push({id: 6, message: stateCopy.newMessageText})
-            stateCopy.newMessageText = ''
-            return stateCopy
+            let newMessageText = state.newMessageText
+            return {
+                ...state,
+                messages: [...state.messages, {id: 6, message: newMessageText}],
+                newMessageText: ''
+            }
         default:
             return state
     }
