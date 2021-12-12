@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler} from "react";
+import React, {} from "react";
 import {addPostAC, PostsType, updateNewPostTextAC} from "../../../redux/profileReducer";
 import {UserPost} from "./UserPost";
 import {connect} from "react-redux";
