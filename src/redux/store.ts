@@ -1,5 +1,6 @@
 import {profileReducer, profileReducerType} from "./profileReducer";
 import {dialogsReducer, dialogsReducerType} from "./dialogsReducer";
+import {UsersReducerType} from "./usersReducer";
 
 export type MessageType = {
     message: string

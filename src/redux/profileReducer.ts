@@ -3,6 +3,7 @@ import {ActionsTypes, StateType} from "./store";
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    //newPost: string
 }
 export type PostsType = {
     id: number
@@ -19,7 +20,7 @@ let initialState: ProfilePageType = {
     newPostText: ''
 }
 
-    export const profileReducer = (state= initialState, action: ActionsTypes) => {
+    export const profileReducer = (state= initialState, action: ActionsTypes): ProfilePageType  => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsType = {

@@ -1,4 +1,5 @@
 import * as url from "url";
+import {ActionsTypes} from "./store";
 
 
 export type LocationType = {
@@ -18,43 +19,10 @@ export type InitialStateType = {
 }
 
 let initialState: InitialStateType = {
-    users: [
-        {
-            id: 1,
-            userPhotoUrl: 'https://sun9-38.userapi.com/impg/c857232/v857232909/173ed0/WuoPWO2i1kA.jpg?size=720x1080&quality=96&sign=8719b8650f2555b4b6e24fbf8808abba&type=album',
-            followed: false,
-            fullName: 'Daniil Novikov',
-            status: 'Hello,dude, go 1 katochku dlya nastroeniya',
-            location: {city: 'Minsk', county: 'Belarus'}
-        },
-        {
-            id: 2,
-            userPhotoUrl: 'https://sun9-38.userapi.com/impg/c857232/v857232909/173ed0/WuoPWO2i1kA.jpg?size=720x1080&quality=96&sign=8719b8650f2555b4b6e24fbf8808abba&type=album',
-            followed: true,
-            fullName: 'Polkovnik Sobko',
-            status: 'How are you?',
-            location: {city: 'Donbas', county: 'DNR'}
-        },
-        {
-            id: 3,
-            userPhotoUrl: 'https://sun9-38.userapi.com/impg/c857232/v857232909/173ed0/WuoPWO2i1kA.jpg?size=720x1080&quality=96&sign=8719b8650f2555b4b6e24fbf8808abba&type=album',
-            followed: false,
-            fullName: 'Arsenii Nerush',
-            status: 'Kotlin, its my life bro!',
-            location: {city: 'Moscow', county: 'Russia'}
-        },
-        {
-            id: 4,
-            userPhotoUrl: 'https://sun9-38.userapi.com/impg/c857232/v857232909/173ed0/WuoPWO2i1kA.jpg?size=720x1080&quality=96&sign=8719b8650f2555b4b6e24fbf8808abba&type=album',
-            followed: true,
-            fullName: 'Roman Pisheiko',
-            status: 'Go drink vodka',
-            location: {city: 'Gomel', county: 'Belarus'}
-        }
-    ]
+    users: []
 }
 
-export const usersReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+export const usersReducer = (state: InitialStateType = initialState, action: UsersReducerType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW": {
             return {
@@ -65,7 +33,7 @@ export const usersReducer = (state: InitialStateType = initialState, action: any
         case "UNFOLLOW":
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.id ? {...u, followed: false} : u)
+                users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         case "SET-USERS":
             return {
@@ -84,7 +52,7 @@ export type UsersReducerType = FollowACType | UnFollowACType | SetUsersAC
 export type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userId: number) => {
     return {
-        type: ' FOLLOW',
+        type: 'FOLLOW',
         userId
     } as const
 }
