@@ -8,9 +8,9 @@ export type LocationType = {
 }
 export type UserType = {
     id: number,
-    userPhotoUrl: string
+    photos: string
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
     location: LocationType
 }

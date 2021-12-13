@@ -9,7 +9,6 @@ export const Content = () => {
             <ProfileInfo/>
             <UserPostContainer />
         </div>
-
     );
 
 }
