@@ -16,10 +16,16 @@ export type UserType = {
 }
 export type InitialStateType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState: InitialStateType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 20,
+    currentPage: 2
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: UsersReducerType): InitialStateType => {
@@ -44,9 +50,6 @@ export const usersReducer = (state: InitialStateType = initialState, action: Use
             return state
     }
 }
-
-//{...state, users: [...state.users, action.users]}
-
 export type UsersReducerType = FollowACType | UnFollowACType | SetUsersAC
 
 export type FollowACType = ReturnType<typeof followAC>

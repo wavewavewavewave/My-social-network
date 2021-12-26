@@ -3,6 +3,7 @@ import {UserType} from "../../redux/usersReducer";
 import s from './Users.module.css';
 import axios from "axios";
 import userPhoto from '../../assets/image/220px-User_icon_2.svg.png'
+import {render} from "react-dom";
 
 export type UsersType = {
     usersPage: Array<UserType>,
@@ -21,7 +22,6 @@ export const Users: React.FC<UsersType> = (props) => {
     }
     return (
         <div>
-            <button onClick={getUsers}>Get users</button>
             {
                 props.usersPage.map(u => <div key={u.id}>
                    <span>
