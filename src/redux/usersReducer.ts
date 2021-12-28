@@ -47,12 +47,20 @@ export const usersReducer = (state: InitialStateType = initialState, action: Use
                 users: [...state.users, ...action.users]
             }
         case "SET-CURRENT-PAGE":
-            return {...state, currentPage: action.currentPage}
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case "SET-TOTAL-USERS-COUNTER" :
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
+            }
         default:
             return state
     }
 }
-export type UsersReducerType = FollowACType | UnFollowACType | SetUsersAC | SetCurrentPageAC
+export type UsersReducerType = FollowACType | UnFollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCounterACType
 
 export type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userId: number) => {
@@ -65,20 +73,27 @@ export type UnFollowACType = ReturnType<typeof unFollowAC>
 export const unFollowAC = (userId: number) => {
     return {
         type: 'UNFOLLOW',
-        userId
+        userId,
     } as const
 }
-export type SetUsersAC = ReturnType<typeof setUsersAC>
+export type SetUsersACType = ReturnType<typeof setUsersAC>
 export const setUsersAC = (users: Array<UserType>) => {
     return {
         type: 'SET-USERS',
-        users
+        users,
     } as const
 }
-export type SetCurrentPageAC = ReturnType<typeof setCurrentPageAC>
+export type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
-        currentPage
+        currentPage,
+    } as const
+}
+export type SetTotalUsersCounterACType = ReturnType<typeof setTotalUsersCounterAC>
+export const setTotalUsersCounterAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNTER',
+        totalUsersCount,
     } as const
 }
