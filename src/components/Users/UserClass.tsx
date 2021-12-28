@@ -10,6 +10,7 @@ type UsersType = {
     follow: (userId: number) => void,
     unFollow: (userId: number) => void,
     setUsers: (users: Array<UserType>) => void,
+    setCurrentPage: (currentPage: number) => void,
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
@@ -27,7 +28,7 @@ class UserClass extends React.Component<UsersType> {
 
         let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
 
-        let pages = []
+        let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
@@ -35,7 +36,8 @@ class UserClass extends React.Component<UsersType> {
             <div>
                 <div>
                     {pages.map(p => {
-                        return <span className={this.props.currentPage === p && s.selectedPage}>{p}</span>
+                        return <span className={this.props.currentPage === p ? s.selectedPage : ''}
+                        onClick={() => {this.props.setCurrentPage(p)}}>{p}</span>
                     })}
                 </div>
                 {
