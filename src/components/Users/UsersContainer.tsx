@@ -10,7 +10,7 @@ import {
     unFollowAC,
     UserType
 } from "../../redux/usersReducer";
-import UserClass from "./UserClass";
+import UserAPIComponent from "./UserAPIComponent";
 
 type mapStateToPropsType = {
     usersPage: Array<UserType>,
@@ -55,4 +55,4 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserClass)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserAPIComponent)
