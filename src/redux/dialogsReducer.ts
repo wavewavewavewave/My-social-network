@@ -1,5 +1,5 @@
 import {ActionsTypes, DialogsType, MessageType} from "./store";
-import {stat} from "fs";
+
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>

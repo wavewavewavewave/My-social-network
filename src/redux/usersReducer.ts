@@ -1,31 +1,34 @@
-import * as url from "url";
-import {ActionsTypes} from "./store";
-
-
 export type LocationType = {
     city: string,
-    county: string
+    county: string,
 }
 export type UserType = {
     id: number,
-    photos: string
+    photos: {
+        small: string,
+        large: string,
+    }
     followed: boolean,
     name: string,
     status: string,
-    location: LocationType
+    location: LocationType,
+    userPhoto: string,
+    error: string,
 }
 export type InitialStateType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
+    users: Array<UserType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    isFetching: boolean,
 }
 
 let initialState: InitialStateType = {
     users: [],
     pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 10,
+    totalUsersCount: 20,
+    currentPage: 1,
+    isFetching: true,
 }
 
 export const usersReducer = (state: InitialStateType = initialState, action: UsersReducerType): InitialStateType => {

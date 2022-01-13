@@ -1,0 +1,28 @@
+.circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background: #000;
+
+    position: relative;
+    overflow: hidden;
+    border: 5px solid #1a1a1a;
+}
+.circle::after {
+    content: "";
+    position: absolute;
+    top: 25%;
+    width: 200%;
+    height: 200%;
+    left: -50%;
+
+    background: rgba(83, 252, 83, 0.5);
+    animation: rotate 10s linear forwards infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+
+}

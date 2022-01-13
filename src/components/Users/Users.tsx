@@ -12,6 +12,7 @@ export type UsersType = {
     unFollow: (userId: number) => void,
     usersPage: Array<UserType>,
     follow: (userId: number) => void,
+    userPhoto: string,
 }
 
 export const Users: React.FC<UsersType> = (props) => {
@@ -37,7 +38,7 @@ export const Users: React.FC<UsersType> = (props) => {
                 props.usersPage.map(u => <div key={u.id}>
                    <span>
                        <div>
-                           <img src={u.photos != null ? u.photos : userPhoto} className={s.userPhoto}/>
+                           <img src={u.photos.small != null ?   u.photos.small : u.userPhoto} className={s.userPhoto}/>
                        </div>
                        <div>
                            {u.followed
