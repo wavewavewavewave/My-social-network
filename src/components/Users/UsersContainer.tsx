@@ -95,7 +95,7 @@ let mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching,
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+/*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
@@ -116,6 +116,14 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
             dispatch(setToggleIsFetchingAC(isFetching))
         }
     }
-}
+}*/
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserAPIComponent)
+export const UsersContainer = connect(mapStateToProps,
+    {
+        follow: followAC,
+        unFollow: unFollowAC,
+        setUsers: setUsersAC,
+        setCurrentPage: setCurrentPageAC,
+        setTotalUsersCounter: setTotalUsersCounterAC,
+        setToggleIsFetching: setToggleIsFetchingAC,
+    })(UserAPIComponent)
