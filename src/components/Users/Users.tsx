@@ -19,26 +19,33 @@ export const Users: React.FC<UsersType> = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages = [];
+    let pages:Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+        if(i <= 10) {
+            pages.push(i)
+        }
     }
+
 
     return (
         <div>
             <div>
-                {pages.map(p => {
+                {pages.map((p, index) => {
+
                     return <span className={props.currentPage === p ? s.selectedPage : ''}
                                  onClick={(e) => {
                                      props.setCurrentPageHandler(p)
                                  }}>{p}</span>
                 })}
+                {pages.length >= 10 && "..."}
             </div>
             {
-                props.usersPage.map(u => <div key={u.id}>
+                props.usersPage.map(u => {
+                    console.log(u)
+                   return <div key={u.id}>
                    <span>
                        <div>
-                           <img src={u.photos.small != null ?   u.photos.small : u.userPhoto} className={s.userPhoto}/>
+                           <img src={u.photos.small != null ?   u.photos.small : props.userPhoto} className={s.userPhoto}/>
                        </div>
                        <div>
                            {u.followed
@@ -50,7 +57,7 @@ export const Users: React.FC<UsersType> = (props) => {
                                }}>Follow</button>}
                        </div>
                    </span>
-                    <span>
+                        <span>
                        <span>
                            <div>{u.name}</div>
                            <div>{u.status}</div>
@@ -60,7 +67,8 @@ export const Users: React.FC<UsersType> = (props) => {
                            <div>{'u.location.county'}</div>
                        </span>
                    </span>
-                </div>)
+                    </div>
+                })
             }
         </div>
     )
