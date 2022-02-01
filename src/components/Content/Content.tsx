@@ -1,9 +1,10 @@
 import {ProfileInfo} from "./UserPosts/ProfileInfo/ProfileInfo";
 import {UserPostContainer} from "./UserPosts/UserPostContainer";
 import React from "react";
+import {ProfileType} from "./ContentConteiner";
 
 type ContentPropsType = {
-    profile: null
+    profile: ProfileType
 }
 
 export const Content = (props: ContentPropsType) => {

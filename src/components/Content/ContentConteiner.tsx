@@ -6,12 +6,19 @@ import {setUserProfile} from "../../redux/profileReducer";
 import {rootReducerType} from "../../redux/reduxStore";
 
 type ContentType = {
-    setUserProfile: (content: null) => void,
-    profile: null
+    setUserProfile: (profile: ProfileType) => void,
+    profile: ProfileType
+}
+export type ProfileType = {
+    photos: SizeType,
+}
+export type SizeType = {
+    small: string,
+    large: string
 }
 
 type MapStateToPropsType = {
-    profile: null,
+    profile: ProfileType,
 }
 
 class ContentContainer extends React.Component<ContentType>{

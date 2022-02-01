@@ -1,10 +1,12 @@
 //import {ActionsTypes, StateType} from "./reduxStore";
 
+import {ProfileType} from "../components/Content/ContentConteiner";
+
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     //newPost: string
-    profile: null
+    profile: ProfileType
 }
 export type PostsType = {
     id: number
@@ -19,7 +21,7 @@ let initialState: ProfilePageType = {
         {id: 3, message: 'Learning programming is so hard(', likesCount: 12}
     ],
     newPostText: '',
-    profile: null,
+    profile: {photos: {small: '', large: ''}},
 }
 
     export const profileReducer = (state= initialState, action: profileReducerType): ProfilePageType  => {
@@ -69,7 +71,7 @@ export const updateNewPostText = (newPost: string) => {
     } as const
 }
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
-export const setUserProfile = (profile: null) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
         type: "SET-USER-PROFILE",
         profile
