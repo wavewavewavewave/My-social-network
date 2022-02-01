@@ -21,7 +21,7 @@ export function ProfileInfo(props: ProfileInfoType) {
             </div>
             <div className={s.profileBlock}>
                 <img
-                    src={props.profile.photos.small}
+                    src={props.profile.photos.large}
                 />
                 avatar + discription
             </div>
