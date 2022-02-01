@@ -1,10 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import s from '../Users/Preloader.module.css'
 import {rootReducerType} from "../../redux/reduxStore";
 import userPhoto from "../../assets/image/220px-User_icon_2.svg.png";
-import preload from "../../assets/image/loading-load.gif";
 import {
     followAC,
     setCurrentPageAC, setToggleIsFetchingAC,

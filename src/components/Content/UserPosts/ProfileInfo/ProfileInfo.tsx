@@ -1,8 +1,11 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
 
+type ProfileInfoType = {
+    profile: null
+}
 
-export function ProfileInfo() {
+export function ProfileInfo(props: ProfileInfoType) {
     return (
         <div>
             <div>

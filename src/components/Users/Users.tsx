@@ -1,8 +1,12 @@
 import React from 'react';
 import s from "./Users.module.css";
-import userPhoto from "../../assets/image/220px-User_icon_2.svg.png";
 import {UserType} from "../../redux/usersReducer";
+import {NavLink} from 'react-router-dom';
 
+
+export const PATH = {
+    PRE_MISS: '/profile'
+}
 
 export type UsersType = {
     totalUsersCount: number,
@@ -19,9 +23,9 @@ export const Users: React.FC<UsersType> = (props) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages:Array<number> = [];
+    let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
-        if(i <= 10) {
+        if (i <= 10) {
             pages.push(i)
         }
     }
@@ -42,11 +46,14 @@ export const Users: React.FC<UsersType> = (props) => {
             {
                 props.usersPage.map(u => {
                     console.log(u)
-                   return <div key={u.id}>
+                    return <div key={u.id}>
                    <span>
                        <div>
-                           <img src={u.photos.small != null ?   u.photos.small : props.userPhoto} className={s.userPhoto}/>
-                       </div>
+                           <NavLink to={PATH.PRE_MISS}>
+                           <img src={u.photos.small != null ? u.photos.small : props.userPhoto}
+                                className={s.userPhoto}/>
+                       </NavLink>
+                           </div>
                        <div>
                            {u.followed
                                ? <button onClick={() => {

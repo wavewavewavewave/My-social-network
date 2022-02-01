@@ -1,5 +1,5 @@
 import React from 'react';
-import {StoreType} from "./redux/store";
+//import {StoreType} from "./redux/store";
 import {rootReducerType} from "./redux/reduxStore";
 import {CombinedState, Store} from "redux";
 

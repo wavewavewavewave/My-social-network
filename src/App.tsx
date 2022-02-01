@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
-import {Content} from "./components/Content/Content";
+import ContentContainer from "./components/Content/ContentConteiner";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
@@ -21,7 +21,7 @@ export const App: React.FC<PropsAppType> = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper'>
-                <Route path='/profile' render={() => <Content />}/>
+                <Route path='/profile' render={() => <ContentContainer />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
                 <Route path='/news' render={() => <News/>}/>
