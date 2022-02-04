@@ -6,10 +6,11 @@ import {setUserProfile} from "../../redux/profileReducer";
 import {rootReducerType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
-type ContentType = {
-    setUserProfile: (profile: ProfileType) => void,
-    profile: ProfileType
-}
+type ContentType = MapStateToPropsType & MapDispatchToProps
+    //setUserProfile: (profile: ProfileType) => void,
+    //profile: ProfileType
+
+
 export type ProfileType = {
     photos: SizeType,
 }
@@ -19,6 +20,9 @@ export type SizeType = {
 }
 type MapStateToPropsType = {
     profile: ProfileType,
+}
+type MapDispatchToProps = {
+    setUserProfile: (profile: ProfileType) => void,
 }
 type PathParamsType = {
     userId: string,
@@ -54,6 +58,4 @@ let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 
 let WithUrlDataContainerComponent = withRouter(ContentContainer)
 
-export default connect(mapStateToProps, {
-    setUserProfile: setUserProfile,
-})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);

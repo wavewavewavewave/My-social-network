@@ -9,19 +9,20 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {Users} from "./components/Users/Users";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type PropsAppType = {
+
 }
 
 export const App: React.FC<PropsAppType> = (props) => {
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer />
             <Navbar/>
             <div className='app-wrapper'>
-                <Route path='/profile: userId' render={() => <ContentContainer />}/>
+                <Route path='/profile: id' render={() => <ContentContainer />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
                 <Route path='/news' render={() => <News/>}/>

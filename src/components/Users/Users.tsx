@@ -49,7 +49,7 @@ export const Users: React.FC<UsersType> = (props) => {
                     return <div key={u.id}>
                    <span>
                        <div>
-                           <NavLink to={PATH.PRE_MISS}>
+                           <NavLink to={`/profile/${u.id}`}>
                            <img src={u.photos.small != null ? u.photos.small : props.userPhoto}
                                 className={s.userPhoto}/>
                        </NavLink>

@@ -18,16 +18,6 @@ let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
         newPostText: state.profile.newPostText
     }
 }
-/*//let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        addPost: (newPostText: string) => {
-            dispatch(addPostAC(newPostText))
-        },
-        onPostAdd: (text: string) => {
-            dispatch(updateNewPostTextAC(text))
-        }
-    }
-}*/
 export const UserPostContainer = connect(mapStateToProps,
     {
         addPost: addPost,
