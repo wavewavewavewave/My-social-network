@@ -60,7 +60,13 @@ export const Users: React.FC<UsersType> = (props) => {
                            {u.followed
                                ? <button onClick={() => {
 
-                                   axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                   instance.delete(`/follow/${u.id}`).then((res) => {
+                                       if(res.data.resultCode === 0) {
+                                           props.unFollow(u.id)
+                                       }
+                                   })
+
+                                   /*axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                            withCredentials: true,
                                            headers: {
                                                'API-KEY': '911248f0-1866-498d-84bc-ce9553ace487'
@@ -70,11 +76,18 @@ export const Users: React.FC<UsersType> = (props) => {
                                        if (res.data.resultCode === 0) {
                                            props.unFollow(u.id)
                                        }
-                                   })
+                                   })*/
                                    //props.unFollow(u.id)
 
                                }}>Unfollow</button>
                                : <button onClick={() => {
+
+                                   /*instance.delete(`/follow/${u.id}`).then((res) => {
+                                       if(res.data.resultCode === 0) {
+                                           props.follow(u.id)
+                                       }
+                                   })*/
+
 
                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                        withCredentials: true,
