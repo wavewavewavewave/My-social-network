@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader.";
+import {usersApi} from "../../api/social-network.";
 
 
 type UsersContType = {
@@ -48,26 +49,30 @@ type mapDispatchToPropsType = {
 class UserAPIComponent extends React.Component<UsersContType> {
     componentDidMount() {
         this.props.setToggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
-            withCredentials: true
-        })
-            .then(res => {
-                this.props.setToggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCounter(res.data.totalCount)
-            });
+        /*  axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+              withCredentials: true
+          })*/
+        /*(`/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)*/
+        /*getUsers(this.props.currentPage, this.props.pageSize)*/
+        /*usersApi.getUsers(this.props.currentPage, this.props.pageSize)*/
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(res => {
+            this.props.setToggleIsFetching(false)
+            this.props.setUsers(res.data.items)
+            this.props.setTotalUsersCounter(res.data.totalCount)
+        });
     }
 
     setCurrentPageHandler = (pageNumber: number) => {
         this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+        /*axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
             withCredentials: true
-        })
-            .then(res => {
-                this.props.setToggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-            });
+        })*/
+
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(res => {
+            this.props.setToggleIsFetching(false)
+            this.props.setUsers(res.data.items)
+        });
     }
 
     render() {
@@ -96,29 +101,6 @@ let mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching,
     }
 }
-/*let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unFollow: (userId: number) => {
-            dispatch(unFollowAC(userId))
-        },
-        setUsers: (users: Array<UserType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCounter: (totalUsersCount: number) => {
-            dispatch(setTotalUsersCounterAC(totalUsersCount))
-        },
-        setToggleIsFetching: (isFetching: boolean) => {
-            dispatch(setToggleIsFetchingAC(isFetching))
-        }
-    }
-}*/
-
 export const UsersContainer = connect(mapStateToProps,
     {
         follow: followAC,

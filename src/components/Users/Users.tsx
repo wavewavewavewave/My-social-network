@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from 'react-router-dom';
-import {instance} from "../../social-network.";
+import {instance} from "../../api/social-network.";
 import axios from "axios";
 
 
