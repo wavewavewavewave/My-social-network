@@ -28,6 +28,27 @@ type UserType = {
     userPhoto: string,
     error: string,
 }
+type ProfileUserType = {
+    userId: string,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    },
+    photos: {
+        small: string,
+        large: string,
+    }
+
+}
 
 
 export const instance = axios.create({
@@ -42,8 +63,11 @@ export const instance = axios.create({
 export const usersApi = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
+    },
+    profileUser(userId: string) {
+        return instance.get<ProfileUserType>(`/profile/` + userId)
     }
 }
-    /*switchUsers() {
-    return instance.get(`/profile`)
+/*switchUsers() {
+return instance.get(`/profile`)
 }*/

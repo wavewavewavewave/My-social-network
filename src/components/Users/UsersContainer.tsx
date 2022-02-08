@@ -61,7 +61,6 @@ class UserAPIComponent extends React.Component<UsersContType> {
             this.props.setTotalUsersCounter(res.data.totalCount)
         });
     }
-
     setCurrentPageHandler = (pageNumber: number) => {
         this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(pageNumber);
