@@ -3,11 +3,7 @@ import {connect} from "react-redux";
 import {rootReducerType} from "../../redux/reduxStore";
 import userPhoto from "../../assets/image/220px-User_icon_2.svg.png";
 import {
-    followAC,
-    setCurrentPageAC, setToggleIsFetchingAC,
-    setTotalUsersCounterAC,
-    setUsersAC,
-    unFollowAC,
+    follow, setCurrentPage, setToggleIsFetching, setTotalUsersCounter, setUsers, unFollow,
     UserType
 } from "../../redux/usersReducer";
 import axios from "axios";
@@ -96,10 +92,10 @@ let mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
 }
 export const UsersContainer = connect(mapStateToProps,
     {
-        follow: followAC,
-        unFollow: unFollowAC,
-        setUsers: setUsersAC,
-        setCurrentPage: setCurrentPageAC,
-        setTotalUsersCounter: setTotalUsersCounterAC,
-        setToggleIsFetching: setToggleIsFetchingAC,
+        follow,
+        unFollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCounter,
+        setToggleIsFetching,
     })(UserAPIComponent)
