@@ -29,25 +29,33 @@ type UserType = {
     error: string,
 }
 type ProfileUserType = {
-    userId: string,
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    contacts: {
-        github: string
-        vk: string
-        facebook: string
-        instagram: string
-        twitter: string
-        website: string
-        youtube: string
-        mainLink: string
-    },
-    photos: {
-        small: string,
-        large: string,
-    }
-
+        userId: string,
+        lookingForAJob: boolean,
+        lookingForAJobDescription: string,
+        fullName: string,
+        contacts: {
+            github: string
+            vk: string
+            facebook: string
+            instagram: string
+            twitter: string
+            website: string
+            youtube: string
+            mainLink: string
+        },
+        photos: {
+            small: string,
+            large: string,
+        }
+}
+type FollowAndUnfollowType = {
+    data: {},
+    fieldsErrors: [],
+    messages: [],
+}
+type FollowAndUnfollowUserType ={
+    data: FollowAndUnfollowType,
+    resultCode: number,
 }
 
 
@@ -66,6 +74,12 @@ export const usersApi = {
     },
     profileUser(userId: string) {
         return instance.get<ProfileUserType>(`/profile/` + userId)
+    },
+    unFollowUser(id: number) {
+        return instance.delete<FollowAndUnfollowUserType>(`/follow/${id}`)
+    },
+    followUser(id: number) {
+        return instance.post<FollowAndUnfollowUserType>(`/follow/${id}`)
     }
 }
 /*switchUsers() {

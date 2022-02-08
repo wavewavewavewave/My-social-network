@@ -8,9 +8,6 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {usersApi} from "../../api/social-network.";
 
 type ContentType = MapStateToPropsType & MapDispatchToProps
-    //setUserProfile: (profile: ProfileType) => void,
-    //profile: ProfileType
-
 
 export type ProfileType = {
     photos: SizeType,
@@ -42,7 +39,6 @@ class ContentContainer extends React.Component<PropsType>{
                 this.props.setUserProfile(res.data)
             });*/
         usersApi.profileUser(userId).then(res => {
-            debugger
             this.props.setUserProfile(res.data)
         })
 
