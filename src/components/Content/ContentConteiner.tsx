@@ -28,16 +28,12 @@ type PathParamsType = {
 type PropsType = RouteComponentProps<PathParamsType> & ContentType
 
 
-class ContentContainer extends React.Component<PropsType>{
+class ContentContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if(!userId) {
+        if (!userId) {
             userId = '2'
         }
-        /*axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(res => {
-                this.props.setUserProfile(res.data)
-            });*/
         usersApi.profileUser(userId).then(res => {
             this.props.setUserProfile(res.data)
         })
@@ -49,7 +45,6 @@ class ContentContainer extends React.Component<PropsType>{
             <Content {...this.props} profile={this.props.profile}/>
         )
     }
-
 }
 
 let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
