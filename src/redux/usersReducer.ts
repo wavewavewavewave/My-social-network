@@ -92,7 +92,7 @@ export type UsersReducerType = FollowACType
     | SetCurrentPageACType
     | SetTotalUsersCounterACType
     | SetToggleIsFetchingACType
-    | FollowingInProgressType
+    | ToggleFollowingInProgressType
 
 export type FollowACType = ReturnType<typeof follow>
 export const follow = (userId: number) => {
@@ -136,7 +136,7 @@ export const setToggleIsFetching = (isFetching: boolean) => {
         isFetching,
     } as const
 }
-export type FollowingInProgressType = ReturnType<typeof toggleFollowingInProgress>
+export type ToggleFollowingInProgressType = ReturnType<typeof toggleFollowingInProgress>
 export const toggleFollowingInProgress = (isFetching: boolean, userId: string) => {
     return {
         type: "TOGGLE_IS_FOLLOWING_PROGRESS",
