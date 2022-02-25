@@ -11,6 +11,7 @@ export type LocationType = {
     county: string,
 }
 export type UserType = {
+    // id: string,
     id: number,
     photos: {
         small: string,

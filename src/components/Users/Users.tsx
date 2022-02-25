@@ -55,24 +55,29 @@ export const Users: React.FC<UsersType> = (props) => {
                            </div>
                        <div>
                            {u.followed
-                               ? <button disabled={props.followingInProgress.some(id => id === (u.id))} onClick={() => {
-                                   props.toggleFollowingInProgress(true, (u.id))
-                                   usersApi.unFollowUser (u.id).then(res => {
-                                       if (res.data.resultCode === 0) {
-                                           props.unFollow(u.id)
-                                       }
-                                       props.toggleFollowingInProgress(false, (u.id))
-                                   })
-                               }}>Unfollow</button>
-                               : <button disabled={props.followingInProgress.some(id => id === (u.id))} onClick={() => {
-                                   props.toggleFollowingInProgress(true, (u.id))
-                                   usersApi.followUser(u.id).then(res => {
-                                       if (res.data.resultCode === 0) {
-                                           props.follow(u.id)
-                                       }
-                                       props.toggleFollowingInProgress(false, String(u.id))
-                                   })
-                               }}>Follow</button>}
+                               ? <button disabled={props.followingInProgress.some(id => id === (u.id).toString())}
+                                         onClick={() => {
+                                             props.toggleFollowingInProgress(true, (u.id).toString())
+                                             usersApi.unFollowUser(u.id)
+                                                 .then(res => {
+                                                     if (res.data.resultCode === 0) {
+                                                         props.unFollow(u.id)
+                                                     }
+                                                     props.toggleFollowingInProgress(false, (u.id).toString())
+                                                 })
+                                                 .catch(e => console.error(e))
+                                         }}>Unfollow</button>
+                               : <button disabled={props.followingInProgress.some(id => id === (u.id).toString())}
+                                         onClick={() => {
+                                             props.toggleFollowingInProgress(true, (u.id).toString())
+                                             usersApi.followUser(u.id)
+                                                 .then(res => {
+                                                 if (res.data.resultCode === 0) {
+                                                     props.follow(u.id)
+                                                 }
+                                                 props.toggleFollowingInProgress(false, String(u.id))
+                                             }).catch(e => console.error(e))
+                                         }}>Follow</button>}
                        </div>
                    </span>
                         <span>
