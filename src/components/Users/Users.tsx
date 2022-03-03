@@ -55,28 +55,27 @@ export const Users: React.FC<UsersType> = (props) => {
                            </div>
                        <div>
                            {u.followed
-                               ? <button disabled={props.followingInProgress.some(id => id === (u.id).toString())}
+                               ? <button disabled={props.followingInProgress.some(id => id === String(u.id))}
                                          onClick={() => {
-                                             props.toggleFollowingInProgress(true, (u.id).toString())
+                                             props.toggleFollowingInProgress(true, String(u.id))
                                              usersApi.unFollowUser(u.id)
                                                  .then(res => {
                                                      if (res.data.resultCode === 0) {
                                                          props.unFollow(u.id)
                                                      }
-                                                     props.toggleFollowingInProgress(false, (u.id).toString())
+                                                     props.toggleFollowingInProgress(false, String(u.id))
                                                  })
-                                                 .catch(e => console.error(e))
                                          }}>Unfollow</button>
-                               : <button disabled={props.followingInProgress.some(id => id === (u.id).toString())}
+                               : <button disabled={props.followingInProgress.some(id => id === String(u.id))}
                                          onClick={() => {
-                                             props.toggleFollowingInProgress(true, (u.id).toString())
+                                             props.toggleFollowingInProgress(true, String(u.id))
                                              usersApi.followUser(u.id)
                                                  .then(res => {
                                                  if (res.data.resultCode === 0) {
                                                      props.follow(u.id)
                                                  }
                                                  props.toggleFollowingInProgress(false, String(u.id))
-                                             }).catch(e => console.error(e))
+                                             })
                                          }}>Follow</button>}
                        </div>
                    </span>

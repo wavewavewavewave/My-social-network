@@ -44,6 +44,7 @@ class ContentContainer extends React.Component<PropsType> {
         return (
             <Content {...this.props} profile={this.props.profile}/>
         )
+
     }
 }
 

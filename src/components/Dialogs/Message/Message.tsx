@@ -1,5 +1,5 @@
 import s from "../DIalogs.module.css";
-import React from "react";
+import React, {useState} from "react";
 //import {MessageType} from "../../../redux/store";
 
 type MessageItemType = {
