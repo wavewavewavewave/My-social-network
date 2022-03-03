@@ -3,12 +3,19 @@ import {connect} from "react-redux";
 import {rootReducerType} from "../../redux/reduxStore";
 import userPhoto from "../../assets/image/220px-User_icon_2.svg.png";
 import {
-    follow, setCurrentPage, setToggleIsFetching, setTotalUsersCounter, setUsers, toggleFollowingInProgress, unFollow,
+    follow,
+    getUsersTC,
+    setCurrentPage,
+    setToggleIsFetching,
+    setTotalUsersCounter,
+    setUsers,
+    toggleFollowingInProgress,
+    unFollow,
     UserType
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader.";
-import {usersApi} from "../../api/social-network.";
+import {usersApi} from "../../api/social-networkApi";
 
 
 type UsersContType = {
@@ -47,20 +54,12 @@ type mapDispatchToPropsType = {
 
 class UserAPIComponent extends React.Component<UsersContType> {
     componentDidMount() {
-        this.props.setToggleIsFetching(true)
-        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(res => {
-            this.props.setToggleIsFetching(false)
-            this.props.setUsers(res.data.items)
-            this.props.setTotalUsersCounter(res.data.totalCount)
-        });
+        // @ts-ignore
+        this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
     setCurrentPageHandler = (pageNumber: number) => {
-        this.props.setToggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber);
-        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(res => {
-            this.props.setToggleIsFetching(false)
-            this.props.setUsers(res.data.items)
-        });
+        //@ts-ignore
+        this.props.getUsersTC(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -101,4 +100,5 @@ export const UsersContainer = connect(mapStateToProps,
         setTotalUsersCounter,
         setToggleIsFetching,
         toggleFollowingInProgress,
+        getUsersTC,
     })(UserAPIComponent)

@@ -1,3 +1,6 @@
+import {usersApi} from "../api/social-networkApi";
+import {Dispatch} from "redux";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -144,4 +147,15 @@ export const toggleFollowingInProgress = (isFetching: boolean, userId: string) =
         isFetching,
         userId,
     } as const
+}
+
+export const getUsersTC = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<UsersReducerType>) => {
+        dispatch(setToggleIsFetching(true))
+        usersApi.getUsers(currentPage, pageSize).then(res => {
+            dispatch(setToggleIsFetching(false))
+            dispatch(setUsers(res.data.items))
+            dispatch(setTotalUsersCounter(res.data.totalCount))
+        });
+    }
 }

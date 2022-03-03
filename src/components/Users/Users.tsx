@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import {UserType} from "../../redux/usersReducer";
 import {NavLink} from 'react-router-dom';
-import {instance, usersApi} from "../../api/social-network.";
+import {instance, usersApi} from "../../api/social-networkApi";
 
 export const PATH = {
     PRE_MISS: '/profile'

@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {setUserProfile} from "../../redux/profileReducer";
 import {rootReducerType} from "../../redux/reduxStore";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {usersApi} from "../../api/social-network.";
+import {usersApi} from "../../api/social-networkApi";
 
 type ContentType = MapStateToPropsType & MapDispatchToProps
 
