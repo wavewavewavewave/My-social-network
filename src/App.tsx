@@ -22,7 +22,7 @@ export const App: React.FC<PropsAppType> = (props) => {
             <HeaderContainer />
             <Navbar/>
             <div className='app-wrapper'>
-                <Route path='/profile: id' render={() => <ContentContainer />}/>
+                <Route path='/profile' render={() => <ContentContainer />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
                 <Route path='/news' render={() => <News/>}/>

@@ -19,7 +19,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
     let dialogsElement = state.dialogs.map(dialogs => <DialogItem name={dialogs.name} id={dialogs.id}/>);
     let messagesElement = state.messages.map(messages => <MessageItem message={messages.message}
                                                                       id={messages.id}/>)
-    // let newMessageText = props.newMessageText
 
     let onSendMessageClick = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.charCode === 13) {

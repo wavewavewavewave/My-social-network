@@ -1,21 +1,21 @@
 import React from 'react';
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {rootReducerType} from "../../redux/reduxStore";
 import userPhoto from "../../assets/image/220px-User_icon_2.svg.png";
 import {
-    follow,
+    follow, followUserTC,
     getUsersTC,
     setCurrentPage,
     setToggleIsFetching,
     setTotalUsersCounter,
     setUsers,
     toggleFollowingInProgress,
-    unFollow,
+    unFollow, unFollowUserTC,
     UserType
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader.";
-import {usersApi} from "../../api/social-networkApi";
+
 
 
 type UsersContType = {
@@ -32,6 +32,9 @@ type UsersContType = {
     setToggleIsFetching: (isFetching: boolean) => void,
     toggleFollowingInProgress: (isFetching: boolean, userId: string) => void,
     followingInProgress: string[],
+    getUsersTC: (currentPage: number, pageSize: number) => void,
+    unFollowUserTC: (id: number) => void,
+    followUserTC: (id: number) => void,
 }
 
 type mapStateToPropsType = {
@@ -54,11 +57,10 @@ type mapDispatchToPropsType = {
 
 class UserAPIComponent extends React.Component<UsersContType> {
     componentDidMount() {
-        // @ts-ignore
+        //const dispatch = useDispatch()
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
     setCurrentPageHandler = (pageNumber: number) => {
-        //@ts-ignore
         this.props.getUsersTC(pageNumber, this.props.pageSize)
     }
 
@@ -76,6 +78,8 @@ class UserAPIComponent extends React.Component<UsersContType> {
                    userPhoto={userPhoto}
                    toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                    followingInProgress={this.props.followingInProgress}
+                   unFollowUserTC={this.props.unFollowUserTC}
+                   followUserTC={this.props.followUserTC}
             />
         </>
     }
@@ -101,4 +105,6 @@ export const UsersContainer = connect(mapStateToProps,
         setToggleIsFetching,
         toggleFollowingInProgress,
         getUsersTC,
+        unFollowUserTC,
+        followUserTC,
     })(UserAPIComponent)

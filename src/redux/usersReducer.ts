@@ -159,3 +159,28 @@ export const getUsersTC = (currentPage: number, pageSize: number) => {
         });
     }
 }
+
+export const unFollowUserTC = (id: number) => {
+    return (dispatch: Dispatch<UsersReducerType>) => {
+        dispatch(toggleFollowingInProgress(true, String(id)))
+        usersApi.unFollowUser(id)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(unFollow(id))
+                }
+                dispatch(toggleFollowingInProgress(false, String(id)))
+            })
+    }
+}
+export const followUserTC = (id: number) => {
+    return (dispatch: Dispatch<UsersReducerType>) => {
+        dispatch(toggleFollowingInProgress(true, String(id)))
+        usersApi.followUser(id)
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    dispatch(follow(id))
+                }
+                dispatch(toggleFollowingInProgress(false, String(id)))
+            })
+    }
+}

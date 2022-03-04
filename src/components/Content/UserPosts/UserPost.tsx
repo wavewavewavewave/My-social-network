@@ -7,7 +7,6 @@ type PropsType = {
     posts: Array<PostsType>
     newPostText: string
     onPostAdd: (text: string) => void
-    //updateNewPostText: (text: string) => void
     addPost: (text: string) => void
 }
 

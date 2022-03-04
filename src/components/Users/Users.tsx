@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Users.module.css";
-import {UserType} from "../../redux/usersReducer";
+import {followUserTC, UserType} from "../../redux/usersReducer";
 import {NavLink} from 'react-router-dom';
 import {instance, usersApi} from "../../api/social-networkApi";
 
@@ -19,6 +19,8 @@ export type UsersType = {
     userPhoto: string,
     toggleFollowingInProgress: (isFetching: boolean, userId: string) => void,
     followingInProgress: string[],
+    unFollowUserTC: (id: number) => void,
+    followUserTC: (id: number) => void,
 }
 
 export const Users: React.FC<UsersType> = (props) => {
@@ -57,25 +59,11 @@ export const Users: React.FC<UsersType> = (props) => {
                            {u.followed
                                ? <button disabled={props.followingInProgress.some(id => id === String(u.id))}
                                          onClick={() => {
-                                             props.toggleFollowingInProgress(true, String(u.id))
-                                             usersApi.unFollowUser(u.id)
-                                                 .then(res => {
-                                                     if (res.data.resultCode === 0) {
-                                                         props.unFollow(u.id)
-                                                     }
-                                                     props.toggleFollowingInProgress(false, String(u.id))
-                                                 })
+                                             props.unFollowUserTC(u.id)
                                          }}>Unfollow</button>
                                : <button disabled={props.followingInProgress.some(id => id === String(u.id))}
                                          onClick={() => {
-                                             props.toggleFollowingInProgress(true, String(u.id))
-                                             usersApi.followUser(u.id)
-                                                 .then(res => {
-                                                 if (res.data.resultCode === 0) {
-                                                     props.follow(u.id)
-                                                 }
-                                                 props.toggleFollowingInProgress(false, String(u.id))
-                                             })
+                                             props.followUserTC(u.id)
                                          }}>Follow</button>}
                        </div>
                    </span>
