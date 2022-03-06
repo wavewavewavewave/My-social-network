@@ -4,13 +4,16 @@ import React from "react";
 import {ProfileType} from "./ContentConteiner";
 
 type ContentPropsType = {
-    profile: ProfileType
+    profilePhoto: {photos: {
+            small: string,
+            large: string
+        }}
 }
 
 export const Content = (props: ContentPropsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profilePhoto={props.profilePhoto}/>
             <UserPostContainer/>
         </div>
     )

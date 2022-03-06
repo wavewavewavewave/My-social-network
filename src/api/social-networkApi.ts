@@ -29,35 +29,43 @@ type UserType = {
     error: string,
 }
 type ProfileUserType = {
-        userId: string,
-        lookingForAJob: boolean,
-        lookingForAJobDescription: string,
-        fullName: string,
-        contacts: {
-            github: string
-            vk: string
-            facebook: string
-            instagram: string
-            twitter: string
-            website: string
-            youtube: string
-            mainLink: string
-        },
-        photos: {
-            small: string,
-            large: string,
-        }
+    userId: string,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    },
+    photos: {
+        small: string,
+        large: string,
+    }
 }
 type FollowAndUnfollowType = {
     data: {},
     fieldsErrors: [],
     messages: [],
 }
-type FollowAndUnfollowUserType ={
+type FollowAndUnfollowUserType = {
     data: FollowAndUnfollowType,
     resultCode: number,
 }
-
+type ProfileAuthType = {
+    resultCode: number
+    messages: [],
+    data: {
+        id: null,
+        email: null,
+        login: null,
+    }
+}
 
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
@@ -80,6 +88,12 @@ export const usersApi = {
     },
     followUser(id: number) {
         return instance.post<FollowAndUnfollowUserType>(`/follow/${id}`)
+    }
+}
+
+export const authApi = {
+    profileAuth() {
+        return instance.get<ProfileAuthType>(`/auth/me`)
     }
 }
 /*switchUsers() {

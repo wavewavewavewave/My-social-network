@@ -1,12 +1,17 @@
 //import {ActionsTypes, StateType} from "./reduxStore";
 
 import {ProfileType} from "../components/Content/ContentConteiner";
+import {Dispatch} from "redux";
+import {usersApi} from "../api/social-networkApi";
 
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     //newPost: string
-    profile: ProfileType
+    profile: {photos: {
+            small: string,
+            large: string
+    }}
 }
 export type PostsType = {
     id: number
@@ -21,10 +26,11 @@ let initialState: ProfilePageType = {
         {id: 3, message: 'Learning programming is so hard(', likesCount: 12}
     ],
     newPostText: '',
+    //profile: {photos: {small: '', large: ''}},
     profile: {photos: {small: '', large: ''}},
 }
 
-    export const profileReducer = (state= initialState, action: profileReducerType): ProfilePageType  => {
+export const profileReducer = (state = initialState, action: profileReducerType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostsType = {
@@ -50,11 +56,14 @@ let initialState: ProfilePageType = {
 
             }
         }
-        default: return state
+        default:
+            return state
     }
 }
 
-export type profileReducerType = AddPostActionType | UpdateNewPostTextType | SetUserProfileType
+export type profileReducerType = AddPostActionType
+    | UpdateNewPostTextType
+    | SetUserProfileType
 
 export type AddPostActionType = ReturnType<typeof addPost>
 export const addPost = (newPostText: string) => {
@@ -77,3 +86,13 @@ export const setUserProfile = (profile: ProfileType) => {
         profile
     } as const
 }
+
+export const profileUserTC = (userId: string) => {
+    return (dispatch: Dispatch<profileReducerType>) => {
+        usersApi.profileUser(userId).then(res => {
+            dispatch(setUserProfile(res.data))
+        })
+
+    }
+}
+

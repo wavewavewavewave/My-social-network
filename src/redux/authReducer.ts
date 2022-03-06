@@ -22,6 +22,9 @@ export type UserType = {
     currentPage: number,
     isFetching: boolean,
 }*/
+import {Dispatch} from "redux";
+import {authApi} from "../api/social-networkApi";
+
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 
 
@@ -65,7 +68,8 @@ export const authReducer = (state: InitialStateType = initialState, action: User
             return state
     }
 }
-export type UsersReducerType = SetUserDataType | SetToggleIsFetchingACType
+export type UsersReducerType = SetUserDataType
+    | SetToggleIsFetchingACType
 
 
 type SetUserDataType = ReturnType<typeof setAuthUserData>
@@ -86,4 +90,16 @@ export const setToggleIsFetchingAC = (isFetching: boolean) => {
         type: "TOGGLE-IS-FETCHING",
         isFetching,
     } as const
+}
+
+export const profileAuthTC = () => {
+    return (dispatch: Dispatch<UsersReducerType>) => {
+        authApi.profileAuth()
+            .then(res => {
+                if (res.data.resultCode === 0) {
+                    let {id, email, login} = res.data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
 }

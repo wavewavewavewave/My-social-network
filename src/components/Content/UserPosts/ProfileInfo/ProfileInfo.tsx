@@ -4,11 +4,15 @@ import {Preloader} from "../../../Preloader/Preloader.";
 import {ProfileType} from "../../ContentConteiner";
 
 type ProfileInfoType = {
-    profile: ProfileType
+    profilePhoto: {photos: {
+        small: string,
+        large: string
+    }}
+    //ProfileType
 }
 
 export function ProfileInfo(props: ProfileInfoType) {
-    if (!props.profile) {
+    if (!props.profilePhoto) {
         return <Preloader/>
     }
 
@@ -21,7 +25,7 @@ export function ProfileInfo(props: ProfileInfoType) {
             </div>
             <div className={s.profileBlock}>
                 <img
-                    src={props.profile.photos.large}
+                    src={props.profilePhoto.photos.large}
                 />
                 avatar + discription
             </div>

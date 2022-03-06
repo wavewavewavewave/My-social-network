@@ -17,7 +17,7 @@ export type UsersType = {
     usersPage: Array<UserType>,
     follow: (userId: number) => void,
     userPhoto: string,
-    toggleFollowingInProgress: (isFetching: boolean, userId: string) => void,
+    // toggleFollowingInProgress: (isFetching: boolean, userId: string) => void,
     followingInProgress: string[],
     unFollowUserTC: (id: number) => void,
     followUserTC: (id: number) => void,

@@ -57,7 +57,6 @@ type mapDispatchToPropsType = {
 
 class UserAPIComponent extends React.Component<UsersContType> {
     componentDidMount() {
-        //const dispatch = useDispatch()
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
     setCurrentPageHandler = (pageNumber: number) => {
@@ -76,7 +75,7 @@ class UserAPIComponent extends React.Component<UsersContType> {
                    usersPage={this.props.usersPage}
                    follow={this.props.follow}
                    userPhoto={userPhoto}
-                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                   // toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                    followingInProgress={this.props.followingInProgress}
                    unFollowUserTC={this.props.unFollowUserTC}
                    followUserTC={this.props.followUserTC}
