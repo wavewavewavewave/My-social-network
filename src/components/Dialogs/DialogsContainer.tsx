@@ -6,18 +6,20 @@ import {rootReducerType} from "../../redux/reduxStore";
 import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
-    dialogsPage: DialogsPageType
-    newMessageText: string
+    dialogsPage: DialogsPageType,
+    newMessageText: string,
+    isAuth: boolean,
 }
 type MapDispatchToPropsType = {
-    onSendMessageClick: () => void
-    onChangeSendMessage: (newText: string) => void
+    onSendMessageClick: () => void,
+    onChangeSendMessage: (newText: string) => void,
 }
 
 let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogs,
-        newMessageText: state.dialogs.newMessageText
+        newMessageText: state.dialogs.newMessageText,
+        isAuth: state.authorization.isAuth,
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {

@@ -4,7 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {profileUserTC, setUserProfile} from "../../redux/profileReducer";
 import {rootReducerType} from "../../redux/reduxStore";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {usersApi} from "../../api/social-networkApi";
 
 type ContentType = MapStateToPropsType & MapDispatchToProps
@@ -36,6 +36,7 @@ type MapStateToPropsType = {
             large: string
         }
     },
+    isAuth: boolean,
 }
 type MapDispatchToProps = {
     profileUserTC: (userId: string) => void,
@@ -56,6 +57,11 @@ class ContentContainer extends React.Component<PropsType> {
     }
 
     render() {
+
+        if (this.props.isAuth === false) {
+            return <Redirect to={'/login'}/>
+        }
+
         return (
             <Content {...this.props} profilePhoto={this.props.profilePhoto}/>
         )
@@ -66,6 +72,7 @@ class ContentContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
     return {
         profilePhoto: state.profile.profile,
+        isAuth: state.authorization.isAuth,
     }
 }
 

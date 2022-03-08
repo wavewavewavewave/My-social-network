@@ -15,6 +15,7 @@ import {
 } from "../../redux/usersReducer";
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader.";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -35,6 +36,7 @@ type UsersContType = {
     getUsersTC: (currentPage: number, pageSize: number) => void,
     unFollowUserTC: (id: number) => void,
     followUserTC: (id: number) => void,
+    isAuth: boolean,
 }
 
 type mapStateToPropsType = {
@@ -44,6 +46,7 @@ type mapStateToPropsType = {
     currentPage: number,
     isFetching: boolean,
     followingInProgress: string[],
+    isAuth: boolean,
 }
 type mapDispatchToPropsType = {
     follow: (userId: number) => void,
@@ -64,6 +67,10 @@ class UserAPIComponent extends React.Component<UsersContType> {
     }
 
     render() {
+
+        if (this.props.isAuth === false) {
+            return <Redirect to={'/login'}/>
+        }
 
         return <>
             {this.props.isFetching ? <Preloader/> : null}
@@ -91,7 +98,8 @@ let mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.toggleFollowingInProgress
+        followingInProgress: state.usersPage.toggleFollowingInProgress,
+        isAuth: state.authorization.isAuth,
     }
 }
 export const UsersContainer = connect(mapStateToProps,

@@ -43,12 +43,6 @@ let initialState: InitialStateType = {
     isAuth: false,
     isFetching: false,
 }
-/*type DataType = {
-    id: number,
-    email: string,
-    login: string,
-}*/
-
 
 export const authReducer = (state: InitialStateType = initialState, action: UsersReducerType): InitialStateType => {
     switch (action.type) {
