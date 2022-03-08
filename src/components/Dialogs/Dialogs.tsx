@@ -2,11 +2,10 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import s from './DIalogs.module.css';
 import {MessageItem} from "./Message/Message";
 import {DialogItem} from "./DialogsItem/DialogsItem";
-//import {} from "../../redux/store";
 import {DialogsPageType} from "../../redux/dialogsReducer";
-import {Redirect} from "react-router-dom";
 
-type DialogsType = {
+
+export type DialogsType = {
     onChangeSendMessage: (newText: string) => void,
     onSendMessageClick: () => void,
     newMessageText: string,
@@ -36,10 +35,6 @@ export const Dialogs: React.FC<DialogsType> = (props) => {
         let newText = e.currentTarget.value
         props.onChangeSendMessage(newText)
         // setValue(newText)
-    }
-
-    if (props.isAuth === false) {
-        return <Redirect to={'/login'}/>
     }
 
     return (

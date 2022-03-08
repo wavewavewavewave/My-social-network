@@ -23,7 +23,7 @@ export const App: React.FC<PropsAppType> = (props) => {
             <HeaderContainer />
             <Navbar/>
             <div className='app-wrapper'>
-                <Route path='/profile' render={() => <ContentContainer />}/>
+                <Route path='/profile: userId?' render={() => <ContentContainer />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
                 <Route path='/login' render={() => <LoginPage />}/>
