@@ -8,8 +8,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {LoginPage} from "./components/Login/LoginPage";
 
@@ -23,7 +23,7 @@ export const App: React.FC<PropsAppType> = (props) => {
             <HeaderContainer />
             <Navbar/>
             <div className='app-wrapper'>
-                <Route path='/profile: userId?' render={() => <ContentContainer />}/>
+                <Route path='/profile' render={() => <ContentContainer />}/>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/users' render={() => <UsersContainer />}/>
                 <Route path='/login' render={() => <LoginPage />}/>

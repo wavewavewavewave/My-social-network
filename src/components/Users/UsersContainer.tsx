@@ -16,7 +16,9 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../Preloader/Preloader.";
 import {Redirect} from "react-router-dom";
-
+import {AuthRedirect} from "../../hoc/AuthRedirect";
+import {compose} from "redux";
+import {Dialogs} from "../Dialogs/Dialogs";
 
 
 type UsersContType = {
@@ -62,16 +64,12 @@ class UserAPIComponent extends React.Component<UsersContType> {
     componentDidMount() {
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize);
     }
+
     setCurrentPageHandler = (pageNumber: number) => {
         this.props.getUsersTC(pageNumber, this.props.pageSize)
     }
 
     render() {
-
-        if (this.props.isAuth === false) {
-            return <Redirect to={'/login'}/>
-        }
-
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -82,7 +80,7 @@ class UserAPIComponent extends React.Component<UsersContType> {
                    usersPage={this.props.usersPage}
                    follow={this.props.follow}
                    userPhoto={userPhoto}
-                   // toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                // toggleFollowingInProgress={this.props.toggleFollowingInProgress}
                    followingInProgress={this.props.followingInProgress}
                    unFollowUserTC={this.props.unFollowUserTC}
                    followUserTC={this.props.followUserTC}
@@ -90,6 +88,11 @@ class UserAPIComponent extends React.Component<UsersContType> {
         </>
     }
 }
+
+
+// let AuthRedirectComponent = AuthRedirect(Users)
+
+
 
 let mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
     return {
@@ -102,16 +105,33 @@ let mapStateToProps = (state: rootReducerType): mapStateToPropsType => {
         isAuth: state.authorization.isAuth,
     }
 }
-export const UsersContainer = connect(mapStateToProps,
-    {
-        follow,
-        unFollow,
-        setUsers,
-        setCurrentPage,
-        setTotalUsersCounter,
-        setToggleIsFetching,
-        toggleFollowingInProgress,
-        getUsersTC,
-        unFollowUserTC,
-        followUserTC,
-    })(UserAPIComponent)
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps,
+        {
+            follow,
+            unFollow,
+            setUsers,
+            setCurrentPage,
+            setTotalUsersCounter,
+            setToggleIsFetching,
+            toggleFollowingInProgress,
+            getUsersTC,
+            unFollowUserTC,
+            followUserTC
+        }),
+    AuthRedirect
+)(UserAPIComponent)
+// export const UsersContainer = connect(mapStateToProps,
+//     {
+//         follow,
+//         unFollow,
+//         setUsers,
+//         setCurrentPage,
+//         setTotalUsersCounter,
+//         setToggleIsFetching,
+//         toggleFollowingInProgress,
+//         getUsersTC,
+//         unFollowUserTC,
+//         followUserTC,
+//     })(AuthRedirectComponent)
