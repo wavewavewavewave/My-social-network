@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css';
 import {Preloader} from "../../../Preloader/Preloader.";
 import {ProfileType} from "../../ContentConteiner";
+import {ProfileStatus} from "./ProfileStatus";
 
 type ProfileInfoType = {
     profilePhoto: {photos: {
@@ -27,7 +28,7 @@ export function ProfileInfo(props: ProfileInfoType) {
                 <img
                     src={props.profilePhoto.photos.large}
                 />
-                avatar + discription
+                <ProfileStatus status={'Hello'}/>
             </div>
         </div>
     )
