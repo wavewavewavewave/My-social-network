@@ -7,13 +7,15 @@ type ContentPropsType = {
     profilePhoto: {photos: {
             small: string,
             large: string
-        }}
+        }},
+    status: string,
+    updateStatus: (status: string) => void,
 }
 
 export const Content = (props: ContentPropsType) => {
     return (
         <div>
-            <ProfileInfo profilePhoto={props.profilePhoto}/>
+            <ProfileInfo profilePhoto={props.profilePhoto} status={props.status} updateStatus={props.updateStatus}/>
             <UserPostContainer/>
         </div>
     )

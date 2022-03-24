@@ -2,7 +2,13 @@ import React from "react";
 import {Content} from "./Content";
 import axios from "axios";
 import {connect} from "react-redux";
-import {profileUserTC, setUserProfile} from "../../redux/profileReducer";
+import {
+    profileUserTC,
+    setStatusProfile,
+    setStatusProfileTC,
+    setUserProfile,
+    updateStatusProfileTC
+} from "../../redux/profileReducer";
 import {rootReducerType} from "../../redux/reduxStore";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {usersApi} from "../../api/social-networkApi";
@@ -38,9 +44,12 @@ type MapStateToPropsType = {
             large: string
         }
     },
+    status: string,
 }
 type MapDispatchToProps = {
     profileUserTC: (userId: string) => void,
+    setStatusProfileTC: (userId: string) => void,
+    updateStatusProfileTC: (status: string) => void,
 }
 type PathParamsType = {
     userId: string,
@@ -55,12 +64,14 @@ class ContentContainer extends React.Component<PropsType> {
             userId = '2'
         }
         this.props.profileUserTC(userId)
+        this.props.setStatusProfileTC(userId)
     }
 
     render() {
 
         return (
-            <Content {...this.props} profilePhoto={this.props.profilePhoto}/>
+            <Content {...this.props} profilePhoto={this.props.profilePhoto}
+                     status={this.props.status} updateStatus={this.props.updateStatusProfileTC}/>
         )
 
     }
@@ -71,10 +82,11 @@ class ContentContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
     return {
         profilePhoto: state.profile.profile,
+        status: state.profile.status,
     }
 }
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {profileUserTC}),
+    connect(mapStateToProps, {profileUserTC, setStatusProfileTC, updateStatusProfileTC}),
     withRouter,
     AuthRedirect
 )(ContentContainer)

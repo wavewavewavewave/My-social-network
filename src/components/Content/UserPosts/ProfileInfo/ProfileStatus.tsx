@@ -3,62 +3,77 @@ import s from "./ProfileInfo.module.css";
 import React, {ChangeEvent, useState} from "react";
 import {TextField} from "@mui/material";
 
-// id="standard-basic" variant="standard"
 
 type ProfileStatusType = {
-    status: string
+    status: string,
+    updateStatus: (status: string) => void,
 }
 
 
-export const ProfileStatus = (props: ProfileStatusType) => {
-    let [editMode, setEditMode] = useState(false);
-    let [title, setTitle] = useState(props.status)
-
-    const activateEditMode = () => {
-        setEditMode(true);
-        setTitle(props.status)
-    }
-    const activateViewMode = () => {
-        setEditMode(false);
-    }
-    const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-    }
-
-    return editMode ?
-        <TextField id="standard-basic" variant="standard" value={title} autoFocus onBlur={activateViewMode}/>
-        : <div><span onDoubleClick={activateEditMode}>{props.status}</span></div>
-}
-
-// export class ProfileStatus extends React.Component<ProfileStatusType> {
+// export const ProfileStatus = (props: ProfileStatusType) => {
+//     let [editMode, setEditMode] = useState(false);
+//     let [status, setStatus] = useState(props.status);
 //
-//     state = {
-//         editMode: false
+//
+//     const activateEditMode = () => {
+//         setEditMode(true);
+//         setStatus(props.status)
+//     }
+//     const deactivateEditMode = () => {
+//         setEditMode(false);
+//     }
+//     const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+//         setStatus(e.currentTarget.value)
 //     }
 //
-//     onDoubleClickHandler = () => {
-//
-//         this.setState({
-//             editMode: true
-//         })
-//         alert('Hey Hey')
-//     }
-//
-//     render() {
-//         return (
-//             <>
-//                 {!this.state.editMode &&
-//                 <div>
-//                     <span onDoubleClick={this.onDoubleClickHandler}>{this.props.status}</span>
-//                 </div>
-//                 }
-//                 {!this.state.editMode &&
-//                 <div>
-//                     <input value={this.props.status}/>
-//                 </div>
-//                 }
-//             </>
-//         )
-//     }
-//
+//     return editMode ?
+//         <TextField id="standard-basic" variant="standard" onChange={changeTitle} value={status} autoFocus
+//                    onBlur={deactivateEditMode}/>
+//         : <div><span onDoubleClick={activateEditMode}>{props.status}</span></div>
 // }
+
+export class ProfileStatus extends React.Component<ProfileStatusType> {
+
+    state = {
+        editMode: false,
+        status: this.props.status
+    }
+
+    activateEditMode = () => {
+        this.setState({
+            editMode: true
+        })
+    }
+    deactivateEditMode = () => {
+        this.setState({
+            editMode: false
+        })
+        this.props.updateStatus(this.state.status)
+    }
+
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+       this.setState({
+           status: e.currentTarget.value
+       })
+    }
+
+    render() {
+        return (
+            <>
+                {!this.state.editMode &&
+                <div>
+                    <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
+                </div>
+                }
+                {!this.state.editMode &&
+                <div>
+                    <TextField id="standard-basic" variant="standard" onChange={this.onStatusChange} value={this.props.status}
+                               autoFocus onBlur={this.deactivateEditMode}/>
+                    {/*<input autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status}/>*/}
+                </div>
+                }
+            </>
+        )
+    }
+
+}

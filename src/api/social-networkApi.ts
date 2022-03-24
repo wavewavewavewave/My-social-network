@@ -67,6 +67,7 @@ type ProfileAuthType = {
     }
 }
 
+
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
     withCredentials: true,
@@ -80,9 +81,6 @@ export const usersApi = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
     },
-    profileUser(userId: string) {
-        return instance.get<ProfileUserType>(`/profile/` + userId)
-    },
     unFollowUser(id: number) {
         return instance.delete<FollowAndUnfollowUserType>(`/follow/${id}`)
     },
@@ -91,11 +89,20 @@ export const usersApi = {
     }
 }
 
+export const profileApi = {
+    profileUser(userId: string) {
+        return instance.get<ProfileUserType>(`/profile/` + userId)
+    },
+    getStatus(userId: string) {
+        return instance.get(`/profile/status/` + userId)
+    },
+    updateStatus(status: string) {
+        return instance.put(`/profile/status/`, {status: status})
+    }
+}
+
 export const authApi = {
     profileAuth() {
         return instance.get<ProfileAuthType>(`/auth/me`)
     }
 }
-/*switchUsers() {
-return instance.get(`/profile`)
-}*/
