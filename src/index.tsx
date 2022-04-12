@@ -1,16 +1,16 @@
 import ReactDOM from "react-dom";
-import {BrowserRouter} from "react-router-dom";
 import {App} from "./App";
 import React from "react";
 import {store} from "./redux/reduxStore";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Provider store={store}>
+    <Provider store={store}>
+        <BrowserRouter>
             <App/>
-        </Provider>
-    </BrowserRouter>, document.getElementById('root'));
+        </BrowserRouter>
+    </Provider>, document.getElementById('root'));
 
 
 

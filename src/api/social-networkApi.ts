@@ -1,5 +1,5 @@
-import axios from "axios";
 import {LocationType} from "../redux/usersReducer";
+import axios from "axios";
 
 
 type SettingsType = {

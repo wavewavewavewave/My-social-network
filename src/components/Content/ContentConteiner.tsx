@@ -1,6 +1,5 @@
 import React from "react";
 import {Content} from "./Content";
-import axios from "axios";
 import {connect} from "react-redux";
 import {
     profileUserTC,
@@ -10,10 +9,12 @@ import {
     updateStatusProfileTC
 } from "../../redux/profileReducer";
 import {rootReducerType} from "../../redux/reduxStore";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {usersApi} from "../../api/social-networkApi";
 import {AuthRedirect} from "../../hoc/AuthRedirect";
+
 import {compose} from "redux";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+
+
 
 type ContentType = MapStateToPropsType & MapDispatchToProps
 
@@ -54,6 +55,9 @@ type MapDispatchToProps = {
 type PathParamsType = {
     userId: string,
 }
+// interface PropsType extends RouteComponentProps<PathParamsType>  {
+//
+// }
 export type PropsType = RouteComponentProps<PathParamsType> & ContentType
 
 
@@ -87,9 +91,11 @@ let mapStateToProps = (state: rootReducerType): MapStateToPropsType => {
 }
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {profileUserTC, setStatusProfileTC, updateStatusProfileTC}),
-    withRouter,
+     withRouter,
     AuthRedirect
 )(ContentContainer)
+
+
 
 // let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 
