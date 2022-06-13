@@ -8,6 +8,10 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
+import s from './Login.module.css';
+import {useSelector} from "react-redux";
+import {rootReducerType} from "../../redux/reduxStore";
+import {Redirect} from "react-router-dom";
 
 type FormikErrorType = {
     email?: string
@@ -17,6 +21,8 @@ type FormikErrorType = {
 
 
 export const LoginPage = () => {
+
+    const logged = useSelector<rootReducerType, boolean>(state => state.authorization.isAuth)
 
     const formik = useFormik({
         initialValues: {
@@ -39,59 +45,65 @@ export const LoginPage = () => {
             return errors;
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            //alert(JSON.stringify(values));
         },
     })
+
+    if (logged) {
+        return <Redirect to={'/profile'}/>
+    }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <form onSubmit={formik.handleSubmit}>
                 <FormControl>
-                    <FormLabel>
-                        <p>To log in get registered
-                            <a href={'https://social-network.samuraijs.com/'}
-                               target={'_blank'}> here
-                            </a>
-                        </p>
-                        <p>or use common test account credentials:</p>
-                        <p>Email: free@samuraijs.com</p>
-                        <p>Password: free</p>
-                    </FormLabel>
-                    <FormGroup>
-                        <TextField label="Email"
-                                   margin="normal"
-                                   name="email"
-                                   onChange={formik.handleChange}
-                                   onBlur={formik.handleBlur}
-                                   value={formik.values.email}/>
+                    <div className={s.box}>
+                        <FormLabel>
+                            <p>To log in get registered
+                                <a href={'https://social-network.samuraijs.com/'}
+                                   target={'_blank'}> here
+                                </a>
+                            </p>
+                            <p>or use common test account credentials:</p>
+                            <p>Email: free@samuraijs.com</p>
+                            <p>Password: free</p>
+                        </FormLabel>
+                        <FormGroup>
+                            <TextField label="Email"
+                                       margin="normal"
+                                       name="email"
+                                       onChange={formik.handleChange}
+                                       onBlur={formik.handleBlur}
+                                       value={formik.values.email}/>
 
-                        {formik.touched.email &&
-                        formik.errors.email ?
-                            <div style={{color: 'red'}}>{formik.errors.email}</div> : null
-                        }
-                        <TextField type="password"
-                                   label="Password"
-                                   margin="normal"
-                                   name="password"
-                                   onChange={formik.handleChange}
-                                   onBlur={formik.handleBlur}
-                                   value={formik.values.password}
-                        />
-                        { formik.touched.password &&
-                        formik.errors.password ?
-                            <div style={{color: 'red'}}>{formik.errors.password}</div> : null
-                        }
-                        <FormControlLabel label={'Remember me'}
-                                          control={
-                                              <Checkbox
-                                                  onChange={formik.handleChange}
-                                                  checked={formik.values.rememberMe}
-                                                  name="rememberMe"
-                                              />}/>
-                        <Button type={'submit'} variant={'contained'} color={'primary'}>
-                            Login
-                        </Button>
-                    </FormGroup>
+                            {formik.touched.email &&
+                            formik.errors.email ?
+                                <div style={{color: 'red'}}>{formik.errors.email}</div> : null
+                            }
+                            <TextField type="password"
+                                       label="Password"
+                                       margin="normal"
+                                       name="password"
+                                       onChange={formik.handleChange}
+                                       onBlur={formik.handleBlur}
+                                       value={formik.values.password}
+                            />
+                            {formik.touched.password &&
+                            formik.errors.password ?
+                                <div style={{color: 'red'}}>{formik.errors.password}</div> : null
+                            }
+                            <FormControlLabel label={'Remember me'}
+                                              control={
+                                                  <Checkbox
+                                                      onChange={formik.handleChange}
+                                                      checked={formik.values.rememberMe}
+                                                      name="rememberMe"
+                                                  />}/>
+                            <Button type={'submit'} variant={'contained'} color={'primary'}>
+                                Login
+                            </Button>
+                        </FormGroup>
+                    </div>
                 </FormControl>
             </form>
         </Grid>

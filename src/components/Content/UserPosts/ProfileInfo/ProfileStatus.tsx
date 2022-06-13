@@ -60,15 +60,15 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
     render() {
         return (
             <>
-                {/*{!this.state.editMode &&*/}
-                {/*<div>*/}
-                {/*    <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>*/}
-                {/*</div>*/}
-                {/*}*/}
-                {!this.state.editMode ?
-                    <TextField id="standard-basic" variant="standard" onChange={this.onStatusChange} value={this.props.status}
+                {!this.state.editMode &&
+                <div>
+                    <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
+                </div>
+                }
+                {!this.state.editMode &&
+                    <TextField id="standard-basic" variant="standard" onDoubleClick={this.activateEditMode} onChange={this.onStatusChange} value={this.props.status}
                                autoFocus onBlur={this.deactivateEditMode}/>
-                    : <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
+                    // : <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
                     /*<input autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status}/>*/
                 }
             </>
