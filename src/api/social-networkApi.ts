@@ -66,6 +66,13 @@ type ProfileAuthType = {
         login: null,
     }
 }
+type LoginType = {
+    resultCode: number,
+    messages: [],
+    data: {
+        userId: number
+    }
+}
 
 
 export const instance = axios.create({
@@ -104,5 +111,8 @@ export const profileApi = {
 export const authApi = {
     profileAuth() {
         return instance.get<ProfileAuthType>(`/auth/me`)
+    },
+    loginUser(data: LoginType) {
+        return instance.post<LoginType>(`/auth/login`)
     }
 }

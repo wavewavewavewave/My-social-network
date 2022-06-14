@@ -9,7 +9,8 @@ let rootStore = combineReducers({
      profile: profileReducer,
      dialogs: dialogsReducer,
      usersPage: usersReducer,
-     authorization: authReducer
+     authorization: authReducer,
+
 })
 
 export type rootReducerType = ReturnType<typeof rootStore>
