@@ -1,5 +1,6 @@
 import {LocationType} from "../redux/usersReducer";
 import axios from "axios";
+import {LoginStateType} from "../redux/loginReducer";
 
 
 type SettingsType = {
@@ -66,13 +67,14 @@ type ProfileAuthType = {
         login: null,
     }
 }
-type LoginType = {
-    resultCode: number,
-    messages: [],
-    data: {
-        userId: number
-    }
-}
+export type ResponseLoginType = any
+    // resultCode: number,
+    // messages: [],
+    // data: {
+    //     userId: number
+    // }
+
+// export type ResponseLoginType = any
 
 
 export const instance = axios.create({
@@ -112,7 +114,7 @@ export const authApi = {
     profileAuth() {
         return instance.get<ProfileAuthType>(`/auth/me`)
     },
-    loginUser(data: LoginType) {
-        return instance.post<LoginType>(`/auth/login`)
+    loginUser(data: LoginStateType) {
+        return instance.post <LoginStateType, ResponseLoginType>(`/auth/login`, {data: data})
     }
 }

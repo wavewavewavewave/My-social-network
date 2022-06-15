@@ -9,12 +9,13 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import s from './Login.module.css';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../redux/reduxStore";
 import {Redirect} from "react-router-dom";
 import InputAdornment from "@mui/material/InputAdornment";
 import {IconButton} from "@mui/material";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
+import {userLoginAC, userLoginTC} from "../../redux/loginReducer";
 
 type FormikErrorType = {
     email?: string
@@ -26,6 +27,7 @@ type FormikErrorType = {
 export const LoginPage = () => {
 
     const logged = useSelector<rootReducerType, boolean>(state => state.authorization.isAuth)
+    const dispatch = useDispatch()
 
     const [eye, setEye] = useState(true)
     const eyeHandleClick = () => {
@@ -58,6 +60,7 @@ export const LoginPage = () => {
         },
         onSubmit: values => {
             //alert(JSON.stringify(values));
+            dispatch(userLoginTC(values))
         },
     })
 

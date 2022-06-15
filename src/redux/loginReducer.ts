@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {authApi} from "../api/social-networkApi";
+import {profileAuthTC} from "./authReducer";
+
 export const initialState: LoginStateType = {
     email: "",
     password: "",
@@ -12,7 +16,7 @@ export type LoginStateType = {
 }
 
 
-export const loginReducer = (state: LoginStateType = initialState, action: LoginReducersActionType) => {
+export const loginReducer = (state: LoginStateType = initialState, action: LoginReducersActionType): LoginStateType => {
     switch (action.type) {
         case 'login/USER-LOGIN':
             return {...state, ...action.user}
@@ -31,6 +35,13 @@ export const userLoginAC = (user: LoginStateType) => ({
 
 export type LoginReducersActionType = SetUserLoginACType
 
-export const userLoginTC = () => () => {
+export const userLoginTC = (data: LoginStateType) => (dispatch: Dispatch<LoginReducersActionType>) => {
+    authApi.loginUser(data)
+        .then(res => {
+            if(res.data.resultCode === 0) {
+                dispatch(userLoginAC(res.data))
+                // dispatch(profileAuthTC())
+            }
 
+        })
 }

@@ -4,13 +4,14 @@ import {dialogsReducer} from "./dialogsReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
+import {loginReducer} from "./loginReducer";
 
 let rootStore = combineReducers({
-     profile: profileReducer,
-     dialogs: dialogsReducer,
-     usersPage: usersReducer,
-     authorization: authReducer,
-
+    profile: profileReducer,
+    dialogs: dialogsReducer,
+    usersPage: usersReducer,
+    authorization: authReducer,
+    loginization: loginReducer,
 })
 
 export type rootReducerType = ReturnType<typeof rootStore>
