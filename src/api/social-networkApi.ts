@@ -77,6 +77,7 @@ export type ResponseLoginType = any
 // export type ResponseLoginType = any
 
 
+
 export const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0',
     withCredentials: true,
@@ -116,5 +117,8 @@ export const authApi = {
     },
     loginUser(data: LoginStateType) {
         return instance.post <LoginStateType, ResponseLoginType>(`/auth/login`, {data: data})
+    },
+    logoutUser() {
+        return instance.delete(`/auth/login`)
     }
 }
