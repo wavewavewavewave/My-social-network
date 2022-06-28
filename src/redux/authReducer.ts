@@ -1,27 +1,3 @@
-/*export type LocationType = {
-    city: string,
-    county: string,
-}
-export type UserType = {
-    id: number,
-    photos: {
-        small: string,
-        large: string,
-    }
-    followed: boolean,
-    name: string,
-    status: string,
-    location: LocationType,
-    userPhoto: string,
-    error: string,
-}*/
-/*export type InitialStateType = {
-    users: Array<UserType>,
-    pageSize: number,
-    totalUsersCount: number,
-    currentPage: number,
-    isFetching: boolean,
-}*/
 import {Dispatch} from "redux";
 import {authApi} from "../api/social-networkApi";
 
@@ -67,13 +43,14 @@ export type UsersReducerType = SetUserDataType
 
 
 type SetUserDataType = ReturnType<typeof setAuthUserData>
-export const setAuthUserData = (id: null, email: null, login: null) => {
+export const setAuthUserData = (id: null, email: null, login: null, isAuth: false) => {
     return {
         type: SET_AUTH_USER_DATA,
         data: {
             id,
             email,
             login,
+            isAuth,
         }
     } as const
 }
@@ -92,7 +69,7 @@ export const profileAuthTC = () => {
             .then(res => {
                 if (res.data.resultCode === 0) {
                     let {id, email, login} = res.data.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserData(id, email, login, false))
                 }
             })
     }

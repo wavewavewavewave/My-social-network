@@ -14,6 +14,8 @@ export type MapDispatchToPropsType = {
 export type MapStateToPropsType = {
     isAuth: boolean,
     login: null,
+    email: null,
+    password: null
 }
 
 class HeaderContainer extends React.Component<PropsType> {

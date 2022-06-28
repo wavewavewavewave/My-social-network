@@ -65,14 +65,21 @@ type ProfileAuthType = {
         id: null,
         email: null,
         login: null,
+        isAuth: false,
     }
 }
-export type ResponseLoginType = any
-    // resultCode: number,
-    // messages: [],
-    // data: {
-    //     userId: number
-    // }
+export type ResponseLoginType = {
+    resultCode: number,
+    messages: [],
+    data: {
+        userId: number
+    }
+}
+export type ResponseLogoutType = {
+    resultCode: number
+    messages: [],
+    data: {}
+}
 
 // export type ResponseLoginType = any
 
@@ -116,9 +123,9 @@ export const authApi = {
         return instance.get<ProfileAuthType>(`/auth/me`)
     },
     loginUser(data: LoginStateType) {
-        return instance.post <LoginStateType, ResponseLoginType>(`/auth/login`, {data: data})
+        return instance.post <ResponseLoginType>(`/auth/login`, {data: data})
     },
     logoutUser() {
-        return instance.delete(`/auth/login`)
+        return instance.delete<ResponseLogoutType>(`/auth/login`)
     }
 }
